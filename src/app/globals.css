@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-forest: #1F2A24;
+    --color-forest-dark: #151D19;
+    --color-forest-light: #2C3B33;
+    --color-ivory: #F9F5EF;
+    --color-ivory-dark: #F0E9DC;
+    --color-sand: #D6CEBE;
+    --color-sand-light: #EBE5D8;
+    --color-sandstone: #C8B69B;
+    --color-gold: #B99A65;
+    --color-gold-light: #C2A676;
+    --color-text-dark: #1A1A1A;
+    --color-text-muted: #5A605C;
+  }
+
+  * {
+    border-color: #E2DBD0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-ivory);
+    color: var(--color-forest);
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-forest);
+    font-family: var(--font-montserrat), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* When document is switched to RTL / Arabic */
+  [dir="rtl"] body,
+  [dir="rtl"] {
+    font-family: var(--font-arabic), "IBM Plex Sans Arabic", Tahoma, Arial, sans-serif !important;
+  }
+
+  /* Prevent artificial letter spacing from breaking Arabic cursive ligatures */
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4,
+  [dir="rtl"] p,
+  [dir="rtl"] span,
+  [dir="rtl"] a,
+  [dir="rtl"] button {
+    letter-spacing: normal !important;
+  }
+
+  ::selection {
+    background-color: #1F2A24;
+    color: #F9F5EF;
+  }
+}
+
+/* Luxury Arabian Architectural Utilities */
+.arch-top {
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+}
+
+.bg-forest {
+  background-color: #1F2A24;
+}
+
+.bg-forest-dark {
+  background-color: #151D19;
+}
+
+.bg-ivory {
+  background-color: #F9F5EF;
+}
+
+.bg-ivory-dark {
+  background-color: #F0E9DC;
+}
+
+.text-forest {
+  color: #1F2A24;
+}
+
+.text-ivory {
+  color: #F9F5EF;
+}
+
+.text-sand {
+  color: #D6CEBE;
+}
+
+.text-gold {
+  color: #B99A65;
+}
+
+.border-forest {
+  border-color: #1F2A24;
+}
+
+.border-ivory {
+  border-color: #F9F5EF;
+}
+
+.border-sand {
+  border-color: #D6CEBE;
+}
+
+.border-sand-light {
+  border-color: #EBE5D8;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F9F5EF;
+}
+::-webkit-scrollbar-thumb {
+  background: #1F2A24;
+}
