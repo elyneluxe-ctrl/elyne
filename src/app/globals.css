@@ -121,3 +121,12 @@
 ::-webkit-scrollbar-thumb {
   background: #1F2A24;
 }
+
+/* Hide scrollbar for Chrome, Safari, Opera and Firefox */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
