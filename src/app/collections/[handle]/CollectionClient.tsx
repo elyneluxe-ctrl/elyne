@@ -142,7 +142,17 @@ export default function CollectionClient({ handle }: { handle: string }) {
 
       {/* Hero Header */}
       <section className="relative pt-36 sm:pt-44 pb-16 sm:pb-20 px-6 sm:px-10 lg:px-14 bg-[#1F2A24] text-[#F9F5EF] overflow-hidden border-b border-[#2C3B33]">
-        <ArabianGeometricWatermark />
+        {/* Subtle Desert Courtyard Overlay on Forest Green Header */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+          <Image
+            src="/images/arabian-background-2.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center opacity-[0.06] mix-blend-screen"
+          />
+        </div>
+        <ArabianGeometricWatermark opacity={0.035} />
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/35 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10 text-center">

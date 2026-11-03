@@ -204,8 +204,20 @@ export default function OurStoryPage() {
       {/* ==================================================
           SECTION 2: HERITAGE SECTION — TWO-COLUMN EDITORIAL
           ================================================== */}
-      <section className="py-16 sm:py-24 lg:py-28 px-6 sm:px-10 lg:px-14 bg-[#F9F5EF] border-b border-[#EAE3D4]/80 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative py-16 sm:py-24 lg:py-28 px-6 sm:px-10 lg:px-14 bg-[#F9F5EF] border-b border-[#EAE3D4]/80 overflow-hidden">
+        {/* Arabian Architectural Wall & Palm Shadow Background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+          <Image
+            src="/images/arabian-background-1.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center opacity-[0.09] filter contrast-[0.95]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F9F5EF]/95 via-[#F9F5EF]/80 to-[#F9F5EF]/95" />
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Architectural Sandstone Corridors */}
             <motion.div
@@ -297,7 +309,19 @@ export default function OurStoryPage() {
           SECTION 4: PHILOSOPHY SECTION — SIGNATURE DARK SECTION
           ================================================== */}
       <section className="relative bg-[#1F2A24] text-[#F9F5EF] overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[460px] lg:min-h-[500px]">
+        {/* Subtle Desert Courtyard Overlay on Forest Green */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+          <Image
+            src="/images/arabian-background-2.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-[center_top] opacity-[0.05] mix-blend-screen"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1F2A24] via-transparent to-[#1F2A24]" />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[460px] lg:min-h-[500px] relative z-10">
           {/* Editorial Content */}
           <motion.div
             initial={{ opacity: 0, x: isRtl ? 30 : -30 }}

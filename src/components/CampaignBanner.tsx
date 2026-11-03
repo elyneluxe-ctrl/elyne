@@ -11,24 +11,35 @@ export default function CampaignBanner() {
 
   return (
     <section className="relative w-full h-[380px] sm:h-[460px] lg:h-[520px] bg-[#2A231C] overflow-hidden flex items-center">
-      {/* Background Architectural Campaign Photograph */}
+      {/* Background Architectural Campaign Photograph with subtle sunlight courtyard depth */}
       <div className="absolute inset-0 w-full h-full">
+        {/* Underlayer: Arabian Desert Courtyard Texture */}
+        <div className="absolute inset-0 w-full h-full">
+          <Image
+            src="/images/arabian-background-2.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center opacity-40 mix-blend-luminosity"
+          />
+        </div>
+
         <Image
           src="/images/campaign-banner-hq.jpg"
           alt="ELYNE LUXE Campaign - Timeless By Tradition"
           fill
           sizes="100vw"
-          className="object-cover object-[center_35%] brightness-[0.88] scale-100 transform hover:scale-102 transition-transform duration-1000 ease-out"
+          className="object-cover object-[center_35%] brightness-[0.88] scale-100 transform hover:scale-102 transition-transform duration-1000 ease-out relative z-10"
         />
         {/* Overlays to enhance text contrast based on RTL/LTR direction */}
         <div
-          className={`absolute inset-0 ${
+          className={`absolute inset-0 z-20 ${
             isRtl
               ? "bg-gradient-to-l from-black/90 via-black/55 to-transparent"
               : "bg-gradient-to-l from-black/85 via-black/45 to-transparent"
           }`}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/25" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/50 via-transparent to-black/25" />
       </div>
 
       {/* Editorial Content */}

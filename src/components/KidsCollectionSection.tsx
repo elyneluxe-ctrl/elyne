@@ -29,8 +29,20 @@ export default function KidsCollectionSection() {
   }, []);
 
   return (
-    <section id="kids-collection" className="bg-[#F9F5EF] py-14 sm:py-22 px-3 sm:px-8 lg:px-14 border-b border-[#EBE5D8]">
-      <div className="max-w-7xl mx-auto">
+    <section id="kids-collection" className="relative bg-[#F9F5EF] py-14 sm:py-22 px-3 sm:px-8 lg:px-14 border-b border-[#EBE5D8] overflow-hidden">
+      {/* Subtle Sandstone Courtyard Depth & Architectural Framing */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+        <Image
+          src="/images/arabian-background-2.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-[center_top] opacity-[0.06] filter contrast-[0.95]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#F9F5EF] via-[#F9F5EF]/85 to-[#F9F5EF]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Editorial Introduction Header */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <motion.div

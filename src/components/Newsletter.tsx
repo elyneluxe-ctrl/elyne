@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { ArrowRight, ArrowLeft, Check } from "lucide-react";
 import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
+import { ArabianGeometricWatermark } from "./ArabianGeometricMotif";
 
 export default function Newsletter() {
   const { t, isRtl } = useCart();
@@ -32,7 +34,22 @@ export default function Newsletter() {
 
   return (
     <section className="bg-[#1F2A24] text-[#F9F5EF] py-14 sm:py-16 px-6 sm:px-10 lg:px-14 border-b border-[#2C3B33] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+      {/* Subtle Desert Courtyard Arch Depth + Geometric Detailing */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+        <Image
+          src="/images/arabian-background-2.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-[center_top] opacity-[0.06] mix-blend-screen"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1F2A24] via-transparent to-[#1F2A24]" />
+      </div>
+
+      {/* Subtle Islamic Geometric Watermark on Forest Green */}
+      <ArabianGeometricWatermark opacity={0.03} />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-14">
           {/* Left Column: Heading & Description */}
           <motion.div
