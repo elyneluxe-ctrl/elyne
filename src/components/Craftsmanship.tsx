@@ -33,16 +33,16 @@ export default function Craftsmanship() {
 
   return (
     <section className="relative bg-[#F9F5EF] py-14 sm:py-20 px-6 sm:px-10 lg:px-14 border-t border-[#EBE5D8] overflow-hidden">
-      {/* Subtle Sandstone Architectural Plaster Background Texture (Soft 3.5% Opacity) */}
+      {/* Sandstone Architectural Plaster Background Texture */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
         <Image
           src="/images/arabian-texture-subtle.webp"
           alt=""
           fill
           sizes="100vw"
-          className="object-cover opacity-[0.035] mix-blend-multiply"
+          className="object-cover opacity-25 mix-blend-multiply"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#F9F5EF] via-transparent to-[#F9F5EF]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#F9F5EF]/85 via-transparent to-[#F9F5EF]/85" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">

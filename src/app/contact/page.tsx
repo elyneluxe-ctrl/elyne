@@ -83,16 +83,16 @@ export default function ContactPage() {
 
       {/* Main Content Grid */}
       <section className="relative py-16 sm:py-24 px-6 sm:px-10 lg:px-14 max-w-7xl mx-auto w-full">
-        {/* Subtle Sandstone Plaster Texture on Content Area (3.5% Opacity) */}
+        {/* Sandstone Plaster Texture on Content Area */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none -mx-6 sm:-mx-10 lg:-mx-14">
           <Image
             src="/images/arabian-texture-subtle.webp"
             alt=""
             fill
             sizes="100vw"
-            className="object-cover opacity-[0.035] mix-blend-multiply"
+            className="object-cover opacity-25 mix-blend-multiply"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#F9F5EF] via-transparent to-[#F9F5EF]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F9F5EF]/85 via-transparent to-[#F9F5EF]/90" />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 relative z-10">

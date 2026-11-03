@@ -30,16 +30,16 @@ export default function KidsCollectionSection() {
 
   return (
     <section id="kids-collection" className="relative bg-[#F9F5EF] py-14 sm:py-22 px-3 sm:px-8 lg:px-14 border-b border-[#EBE5D8] overflow-hidden">
-      {/* Subtle Sandstone Courtyard Depth & Architectural Framing (Soft 3.5% Opacity) */}
+      {/* Arabian Courtyard & Sunlit Arch Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
         <Image
           src="/images/arabian-background-2.webp"
           alt=""
           fill
           sizes="100vw"
-          className="object-cover object-[center_top] opacity-[0.035] filter contrast-[0.95]"
+          className="object-cover object-[center_top] opacity-30 filter contrast-[1.02]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#F9F5EF] via-[#F9F5EF]/90 to-[#F9F5EF]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F9F5EF]/85 via-[#F9F5EF]/60 to-[#F9F5EF]/90" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
