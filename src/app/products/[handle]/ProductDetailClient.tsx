@@ -488,8 +488,20 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
 
       {/* Atelier Editorial Gallery: All Related Views & Angles */}
       {images.length > 1 && (
-        <section className="py-14 sm:py-20 px-4 sm:px-8 lg:px-14 bg-[#FAF6F0] border-t border-[#EAE3D4] mt-8">
-          <div className="max-w-7xl mx-auto">
+        <section className="relative py-14 sm:py-20 px-4 sm:px-8 lg:px-14 bg-[#FAF6F0] border-t border-[#EAE3D4] mt-8 overflow-hidden">
+          {/* Subtle Sandstone Architectural Plaster Background (3% Opacity) */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+            <Image
+              src="/images/arabian-texture-subtle.webp"
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover opacity-[0.03] mix-blend-multiply"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#FAF6F0] via-transparent to-[#FAF6F0]" />
+          </div>
+
+          <div className="max-w-7xl mx-auto relative z-10">
             <div className="text-center mb-10">
               <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.25em] uppercase text-[#B99A65] block mb-2">
                 {isRtl ? "معرض تفاصيل الأتيليه" : "ATELIER EDITORIAL GALLERY & ANGLES"}

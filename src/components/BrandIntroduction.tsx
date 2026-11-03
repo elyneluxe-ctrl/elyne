@@ -11,20 +11,20 @@ export default function BrandIntroduction() {
 
   return (
     <section className="relative bg-[#F9F5EF] text-[#1F2A24] pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 border-b border-[#EBE5D8]/80 overflow-hidden">
-      {/* Background Style A — Arabian Architectural Wall & Palm Shadow (Low Opacity) */}
+      {/* Background Style A — Arabian Architectural Wall & Palm Shadow (Subtle & Understated) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
         <Image
           src="/images/arabian-background-1.webp"
           alt=""
           fill
           sizes="100vw"
-          className="object-cover object-[center_30%] opacity-[0.09] filter saturate-[0.85]"
+          className="object-cover object-[center_30%] opacity-[0.045] filter saturate-[0.8]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F9F5EF]/80 via-transparent to-[#F9F5EF]/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F9F5EF]/90 via-transparent to-[#F9F5EF]/95" />
       </div>
 
-      {/* Subtle Arabian Geometric Watermark (3.5% visual presence) */}
-      <ArabianGeometricWatermark opacity={0.035} />
+      {/* Subtle Arabian Geometric Watermark (2.5% visual presence) */}
+      <ArabianGeometricWatermark opacity={0.025} />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 relative z-10">
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 md:gap-14">

@@ -34,20 +34,20 @@ export default function Newsletter() {
 
   return (
     <section className="bg-[#1F2A24] text-[#F9F5EF] py-14 sm:py-16 px-6 sm:px-10 lg:px-14 border-b border-[#2C3B33] relative overflow-hidden">
-      {/* Subtle Desert Courtyard Arch Depth + Geometric Detailing */}
+      {/* Subtle Desert Courtyard Arch Depth + Geometric Detailing (Subtle 3% Opacity) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
         <Image
           src="/images/arabian-background-2.webp"
           alt=""
           fill
           sizes="100vw"
-          className="object-cover object-[center_top] opacity-[0.06] mix-blend-screen"
+          className="object-cover object-[center_top] opacity-[0.03] mix-blend-screen"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1F2A24] via-transparent to-[#1F2A24]" />
       </div>
 
-      {/* Subtle Islamic Geometric Watermark on Forest Green */}
-      <ArabianGeometricWatermark opacity={0.03} />
+      {/* Subtle Islamic Geometric Watermark on Forest Green (Subtle 2% Opacity) */}
+      <ArabianGeometricWatermark opacity={0.02} />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-14">

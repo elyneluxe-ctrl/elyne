@@ -13,14 +13,14 @@ export default function CampaignBanner() {
     <section className="relative w-full h-[380px] sm:h-[460px] lg:h-[520px] bg-[#2A231C] overflow-hidden flex items-center">
       {/* Background Architectural Campaign Photograph with subtle sunlight courtyard depth */}
       <div className="absolute inset-0 w-full h-full">
-        {/* Underlayer: Arabian Desert Courtyard Texture */}
+        {/* Underlayer: Arabian Desert Courtyard Texture (Gentle 18% Opacity) */}
         <div className="absolute inset-0 w-full h-full">
           <Image
             src="/images/arabian-background-2.webp"
             alt=""
             fill
             sizes="100vw"
-            className="object-cover object-center opacity-40 mix-blend-luminosity"
+            className="object-cover object-center opacity-[0.18] mix-blend-luminosity"
           />
         </div>
 

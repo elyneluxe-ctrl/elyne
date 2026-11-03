@@ -37,6 +37,16 @@ export default function ContactPage() {
 
       {/* Cinematic Dark Header Section */}
       <section className="relative pt-36 sm:pt-44 pb-20 sm:pb-28 px-6 sm:px-10 lg:px-14 bg-[#1F2A24] text-[#F9F5EF] overflow-hidden border-b border-[#2C3B33]">
+        {/* Subtle Desert Courtyard Background Overlay (3% Opacity) */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+          <Image
+            src="/images/arabian-background-2.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center opacity-[0.03] mix-blend-screen"
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/40 pointer-events-none" />
         <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#B99A65]/5 blur-3xl pointer-events-none" />
 
@@ -72,8 +82,20 @@ export default function ContactPage() {
       </section>
 
       {/* Main Content Grid */}
-      <section className="py-16 sm:py-24 px-6 sm:px-10 lg:px-14 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+      <section className="relative py-16 sm:py-24 px-6 sm:px-10 lg:px-14 max-w-7xl mx-auto w-full">
+        {/* Subtle Sandstone Plaster Texture on Content Area (3.5% Opacity) */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none -mx-6 sm:-mx-10 lg:-mx-14">
+          <Image
+            src="/images/arabian-texture-subtle.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-[0.035] mix-blend-multiply"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F9F5EF] via-transparent to-[#F9F5EF]" />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 relative z-10">
           {/* Left Column: Contact Channels & Atelier Information */}
           <motion.div
             initial={{ opacity: 0, x: isRtl ? 20 : -20 }}
