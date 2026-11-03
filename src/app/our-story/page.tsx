@@ -205,16 +205,16 @@ export default function OurStoryPage() {
           SECTION 2: HERITAGE SECTION — TWO-COLUMN EDITORIAL
           ================================================== */}
       <section className="relative py-16 sm:py-24 lg:py-28 px-6 sm:px-10 lg:px-14 bg-[#F9F5EF] border-b border-[#EAE3D4]/80 overflow-hidden">
-        {/* Arabian Architectural Wall & Palm Shadow Background */}
+        {/* Arabian Architectural Wall & Palm Shadow Background (High Clarity) */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
           <Image
             src="/images/arabian-background-1.webp"
             alt=""
             fill
             sizes="100vw"
-            className="object-cover object-center opacity-30 filter contrast-[1.02]"
+            className="object-cover object-center opacity-60 filter contrast-[1.05]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F9F5EF]/90 via-[#F9F5EF]/65 to-[#F9F5EF]/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F9F5EF]/75 via-[#F9F5EF]/40 to-[#F9F5EF]/75" />
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">

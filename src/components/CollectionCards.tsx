@@ -65,16 +65,16 @@ export default function CollectionCards() {
 
   return (
     <section className="relative bg-[#F9F5EF] py-8 sm:py-16 lg:py-20 px-4 sm:px-10 lg:px-14 overflow-hidden">
-      {/* Arabian Architectural Courtyard Wall & Palm Shadows Background */}
+      {/* Arabian Architectural Courtyard Wall & Palm Shadows Background (High Clarity & Visibility) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
         <Image
           src="/images/arabian-background-1.webp"
           alt=""
           fill
           sizes="100vw"
-          className="object-cover object-[center_35%] opacity-35 filter contrast-[1.02]"
+          className="object-cover object-[center_35%] opacity-65 filter contrast-[1.05]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F9F5EF]/85 via-[#F9F5EF]/55 to-[#F9F5EF]/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F9F5EF]/60 via-[#F9F5EF]/30 to-[#F9F5EF]/70" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">

@@ -11,16 +11,16 @@ export default function BrandIntroduction() {
 
   return (
     <section className="relative bg-[#F9F5EF] text-[#1F2A24] pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 border-b border-[#EBE5D8]/80 overflow-hidden">
-      {/* Background Style A — Arabian Architectural Wall & Palm Shadow */}
+      {/* Background Style A — Arabian Architectural Wall & Palm Shadow (High Clarity) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
         <Image
           src="/images/arabian-background-1.webp"
           alt=""
           fill
           sizes="100vw"
-          className="object-cover object-[center_30%] opacity-25 filter saturate-[0.95]"
+          className="object-cover object-[center_30%] opacity-55 filter saturate-[0.95] contrast-[1.05]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F9F5EF]/80 via-[#F9F5EF]/60 to-[#F9F5EF]/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F9F5EF]/65 via-[#F9F5EF]/35 to-[#F9F5EF]/75" />
       </div>
 
       {/* Subtle Arabian Geometric Watermark */}
