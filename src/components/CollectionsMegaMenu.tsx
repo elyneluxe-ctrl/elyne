@@ -30,14 +30,6 @@ export default function CollectionsMegaMenu({ onClose }: CollectionsMegaMenuProp
     ]
   };
 
-  const col3 = {
-    title: isRtl ? "اكتشف المزيد" : "DISCOVER",
-    links: [
-      { name: t.megaMenu.newArrivals, href: "/collections/new-arrivals" },
-      { name: t.megaMenu.bestSellers, href: "/collections/best-sellers" }
-    ]
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: -8 }}
@@ -48,7 +40,7 @@ export default function CollectionsMegaMenu({ onClose }: CollectionsMegaMenuProp
       onMouseLeave={onClose}
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 lg:gap-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
           {/* Column 1: SIGNATURE COLLECTIONS */}
           <div className="flex flex-col space-y-5">
             <h4 className="text-[11px] font-semibold tracking-[0.25em] uppercase text-[#1F2A24]/60 border-b border-[#D6CEBE]/60 pb-3">
@@ -89,27 +81,7 @@ export default function CollectionsMegaMenu({ onClose }: CollectionsMegaMenuProp
             </ul>
           </div>
 
-          {/* Column 3: DISCOVER */}
-          <div className="flex flex-col space-y-5">
-            <h4 className="text-[11px] font-semibold tracking-[0.25em] uppercase text-[#1F2A24]/60 border-b border-[#D6CEBE]/60 pb-3">
-              {col3.title}
-            </h4>
-            <ul className="space-y-4">
-              {col3.links.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    onClick={onClose}
-                    className="text-sm font-normal tracking-[0.05em] text-[#1F2A24] hover:text-[#C2A676] transition-colors block py-0.5"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: FEATURED EDITORIAL */}
+          {/* Column 3: FEATURED EDITORIAL */}
           <div className="flex flex-col space-y-4">
             <h4 className="text-[11px] font-semibold tracking-[0.25em] uppercase text-[#1F2A24]/60 border-b border-[#D6CEBE]/60 pb-3">
               {isRtl ? "إصدار مميز" : "FEATURED"}
