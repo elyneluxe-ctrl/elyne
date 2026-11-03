@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Search, User, ShoppingBag, Menu, X, ChevronDown, Globe } from "lucide-react";
+import { Search, User, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { motion, AnimatePresence } from "framer-motion";
 import MenMegaMenu from "./MenMegaMenu";
@@ -213,25 +213,8 @@ export default function Navbar() {
           </div>
         </nav>
 
-        {/* RIGHT (or LEFT in RTL): Currency, Language, Search, Account, Shopping Bag */}
+        {/* RIGHT (or LEFT in RTL): Search, Account, Shopping Bag */}
         <div className="flex items-center space-x-3 sm:space-x-5 rtl:space-x-reverse text-[#F9F5EF] w-16 lg:w-auto justify-end">
-          {/* Currency Selector: AED / د.إ */}
-          <div className="hidden sm:flex items-center text-[11px] tracking-widest font-medium text-[#F9F5EF]/85 border-r rtl:border-r-0 rtl:border-l border-[#F9F5EF]/20 pr-4 rtl:pr-0 rtl:pl-4">
-            <span className="text-[#B99A65] font-semibold">{t.nav.currency}</span>
-          </div>
-
-          {/* Language Selector: EN / العربية with smooth toggle */}
-          <button
-            onClick={toggleLanguage}
-            className="flex items-center space-x-1.5 rtl:space-x-reverse text-[11px] tracking-wider text-[#F9F5EF]/90 hover:text-white transition-colors border-r rtl:border-r-0 rtl:border-l border-[#F9F5EF]/20 pr-4 rtl:pr-0 rtl:pl-4"
-            aria-label="Switch Language / تبديل اللغة"
-          >
-            <Globe className="w-3.5 h-3.5 text-[#B99A65]" />
-            <span className="font-medium text-[#B99A65] hover:text-white transition-colors">
-              {t.nav.langToggle}
-            </span>
-          </button>
-
           {/* Search Trigger */}
           <button
             onClick={openSearch}
