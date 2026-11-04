@@ -23,24 +23,24 @@ const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://elyneluxe.ae"),
-  title: "ELYNE LUXE | Heritage Meets Modern Elegance | Premium Emirati Menswear",
+  title: "ELYNE LUXE | Heritage Meets Modern Elegance | Premium Emirati Thobes",
   description:
-    "Discover ELYNE LUXE - A Signature of Elegance. Luxury Emirati Kanduras for Men & Boys crafted with traditional tailoring, Japanese fabrics, and contemporary sophistication.",
+    "Discover ELYNE LUXE - A Signature of Elegance. Luxury Emirati Thobes for Men & Boys crafted with traditional tailoring, Japanese fabrics, and contemporary sophistication.",
   keywords: [
     "Elyne Luxe",
-    "Emirati Kandura",
-    "Luxury Kandura",
+    "Emirati Thobe",
+    "Luxury Thobe",
     "Dubai Menswear",
     "Men Thobe",
-    "Boys Kandura",
+    "Boys Thobe",
     "Traditional Emirati Fashion",
     "Bespoke Tailoring UAE",
-    "كندورة إماراتية",
+    "ثوب إماراتي",
     "أزياء رجالية فاخرة دبي"
   ],
   openGraph: {
     title: "ELYNE LUXE | A Signature of Elegance | بصمة الأناقة",
-    description: "Heritage meets modern elegance. Premium Kanduras for Men & Boys. أصالة تلتقي بالأناقة العصرية.",
+    description: "Heritage meets modern elegance. Premium Thobes for Men & Boys. أصالة تلتقي بالأناقة العصرية.",
     url: "https://elyneluxe.ae",
     siteName: "ELYNE LUXE",
     images: [

@@ -26,7 +26,7 @@ export default function CollectionCards() {
       cta: t.collections.menCta,
       href: "/collections/emirati-thobes",
       image: "/images/collection-men-luxury.jpg",
-      alt: "Luxury Men's Emirati Kandura Collection"
+      alt: "Luxury Men's Emirati Thobe Collection"
     },
     {
       id: "collection-boys",
@@ -37,7 +37,7 @@ export default function CollectionCards() {
       cta: t.collections.boysCta,
       href: "/collections/kids-thobes",
       image: "/images/collection-boys-luxury.jpg",
-      alt: "Luxury Boys' Emirati Kandura Collection"
+      alt: "Luxury Boys' Emirati Thobe Collection"
     }
   ];
 

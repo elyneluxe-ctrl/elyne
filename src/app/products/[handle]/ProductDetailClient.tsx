@@ -305,7 +305,7 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs font-semibold tracking-[0.16em] uppercase text-[#1F2A24]">
-                    {isRtl ? "اختر المقاس (طول الكندورة)" : "SELECT SIZE (KANDURA LENGTH)"}
+                    {isRtl ? "اختر المقاس (طول الثوب)" : "SELECT SIZE (THOBE LENGTH)"}
                   </span>
                   <button
                     onClick={() => setShowSizeGuide(!showSizeGuide)}
@@ -353,8 +353,8 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
                 </div>
                 <p className="text-[11px] mb-2 font-light">
                   {isRtl
-                    ? "مقاسات الكندورة توافق الطول الإجمالي بالبوصة من الكتف إلى الكاحل."
-                    : "Kandura sizes correspond to your height in inches from shoulder to ankle."}
+                    ? "مقاسات الثوب توافق الطول الإجمالي بالبوصة من الكتف إلى الكاحل."
+                    : "Thobe sizes correspond to your height in inches from shoulder to ankle."}
                 </p>
                 <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-[10.5px]">
                   <span>• {isRtl ? "مقاس 52: الطول 160 – 165 سم" : "Size 52: Height 160 – 165 cm"}</span>

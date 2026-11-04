@@ -213,7 +213,7 @@ export const translations: Record<"EN" | "AR", Translations> = {
       tagline: "A SIGNATURE OF ELEGANCE",
       headlinePart1: "HERITAGE MEETS",
       headlinePart2: "MODERN ELEGANCE",
-      subtitle: "The definitive Emirati Kandura, meticulously hand-tailored with generational artisanship and contemporary refinement.",
+      subtitle: "The definitive Emirati Thobe, meticulously hand-tailored with generational artisanship and contemporary refinement.",
       cta: "DISCOVER THE COLLECTION",
       scrollText: "SCROLL TO DISCOVER"
     },
@@ -227,7 +227,7 @@ export const translations: Record<"EN" | "AR", Translations> = {
       menBadge: "MEN'S ATELIER",
       menEyebrow: "SIGNATURE COUTURE",
       menTitle: "MEN",
-      menDesc: "Tailored Emirati Kanduras crafted for timeless distinction and effortless comfort.",
+      menDesc: "Tailored Emirati Thobes crafted for timeless distinction and effortless comfort.",
       menCta: "EXPLORE MEN",
       boysBadge: "JUNIOR ATELIER",
       boysEyebrow: "NEXT GENERATION",
@@ -238,7 +238,7 @@ export const translations: Record<"EN" | "AR", Translations> = {
     kids: {
       eyebrow: "LITTLE GENTLEMEN",
       title: "MINIATURE ELEGANCE",
-      desc: "Designed with the same artisanal precision as our men's collection, our boys' Kanduras embody Emirati grace, softness, and durability for cherished family occasions.",
+      desc: "Designed with the same artisanal precision as our men's collection, our boys' Thobes embody Emirati grace, softness, and durability for cherished family occasions.",
       cta: "SHOP BOYS' COLLECTION",
       features: {
         comfort: "ULTRA-SOFT TEXTILES",
@@ -260,7 +260,7 @@ export const translations: Record<"EN" | "AR", Translations> = {
     craftsmanship: {
       eyebrow: "EXQUISITE ARTISANSHIP",
       title: "DETAILS DEFINE ELEGANCE",
-      desc: "Every ELYNE LUXE Kandura requires over 14 hours of master cutting, single-needle precision stitching, and hand-finished finishing.",
+      desc: "Every ELYNE LUXE Thobe requires over 14 hours of master cutting, single-needle precision stitching, and hand-finished finishing.",
       pillars: {
         collar: {
           title: "STAND COLLAR",
@@ -311,7 +311,7 @@ export const translations: Record<"EN" | "AR", Translations> = {
     cart: {
       title: "YOUR SHOPPING BAG",
       empty: "YOUR BAG IS EMPTY",
-      emptyDesc: "Explore our signature collection of handcrafted Emirati Kanduras.",
+      emptyDesc: "Explore our signature collection of handcrafted Emirati Thobes.",
       startShopping: "START SHOPPING",
       subtotal: "SUBTOTAL",
       checkout: "PROCEED TO CHECKOUT",
@@ -321,19 +321,19 @@ export const translations: Record<"EN" | "AR", Translations> = {
     },
     search: {
       title: "SEARCH THE ATELIER",
-      placeholder: "Search Kanduras, fabrics, or accessories...",
+      placeholder: "Search Thobes, fabrics, or accessories...",
       suggestions: "POPULAR SEARCHES",
-      trending: ["Classic White Kandura", "Moroccan Hooded Thobe", "Boys Sand Beige", "Toyobo Fabric Thobe"],
+      trending: ["Classic White Thobe", "Moroccan Hooded Thobe", "Boys Sand Beige", "Toyobo Fabric Thobe"],
       noResults: "No results found matching your inquiry."
     },
     ourStory: {
       heroEyebrow: "OUR STORY",
       heroTitle: "A SIGNATURE OF ELEGANCE",
-      heroDesc: "Rooted in Emirati heritage and crafted for today, ELYNE LUXE redefines the Kandura with a modern perspective, honouring tradition while embracing contemporary style.",
+      heroDesc: "Rooted in Emirati heritage and crafted for today, ELYNE LUXE redefines the Thobe with a modern perspective, honouring tradition while embracing contemporary style.",
       heroCta: "EXPLORE OUR COLLECTION",
       heritageEyebrow: "OUR HERITAGE",
       heritageTitle: "HERITAGE MEETS MODERN ELEGANCE",
-      heritageDesc: "At ELYNE LUXE, we preserve the timeless essence of Emirati tradition while bringing a refined, modern touch to men's and boys' Kanduras. Every piece reflects our commitment to quality, craftsmanship and enduring style.",
+      heritageDesc: "At ELYNE LUXE, we preserve the timeless essence of Emirati tradition while bringing a refined, modern touch to men's and boys' Thobes. Every piece reflects our commitment to quality, craftsmanship and enduring style.",
       pillars: {
         fabrics: {
           title: "PREMIUM FABRICS",
@@ -354,7 +354,7 @@ export const translations: Record<"EN" | "AR", Translations> = {
       },
       philosophyEyebrow: "OUR PHILOSOPHY",
       philosophyTitle: "TRADITION IN EVERY DETAIL",
-      philosophyDesc: "More than clothing, our Kanduras represent identity, pride and a way of life — thoughtfully designed for today and for generations to come."
+      philosophyDesc: "More than clothing, our Thobes represent identity, pride and a way of life — thoughtfully designed for today and for generations to come."
     },
     contact: {
       eyebrow: "ATELIER CONCIERGE",

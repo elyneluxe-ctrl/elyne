@@ -15,7 +15,7 @@ export default function ContactPage() {
     name: "",
     email: "",
     phone: "",
-    inquiryType: "Bespoke Kandura Tailoring",
+    inquiryType: "Bespoke Thobe Tailoring",
     message: ""
   });
   const [submitted, setSubmitted] = useState(false);
@@ -215,7 +215,7 @@ export default function ContactPage() {
               <p className="text-xs font-light text-[#F9F5EF]/80 leading-relaxed">
                 {isRtl
                   ? "عش تجربة خياطة الكندورة الإماراتية الفاخرة في جناحنا الخاص مع كبار الخياطين ومختارات الأقمشة الحصرية."
-                  : "Experience bespoke Kandura craftsmanship in our private suite with master tailors and personalized fabric curation."}
+                  : "Experience bespoke Thobe craftsmanship in our private suite with master tailors and personalized fabric curation."}
               </p>
             </div>
           </motion.div>
@@ -251,7 +251,7 @@ export default function ContactPage() {
                         name: "",
                         email: "",
                         phone: "",
-                        inquiryType: "Bespoke Kandura Tailoring",
+                        inquiryType: "Bespoke Thobe Tailoring",
                         message: ""
                       });
                     }}
@@ -334,8 +334,8 @@ export default function ContactPage() {
                     onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
                     className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#DCD5C7] text-sm text-[#1F2A24] focus:outline-none focus:border-[#1F2A24] transition-colors cursor-pointer"
                   >
-                    <option value="Bespoke Kandura Tailoring">
-                      {isRtl ? "استشارة خياطة الكندورة المخصصة" : "Bespoke Kandura Tailoring Consultation"}
+                    <option value="Bespoke Thobe Tailoring">
+                      {isRtl ? "استشارة خياطة الكندورة المخصصة" : "Bespoke Thobe Tailoring Consultation"}
                     </option>
                     <option value="VIP Atelier Fitting">
                       {isRtl ? "جلسة قياس خاصة في الأتيليه" : "VIP Private Atelier Fitting"}

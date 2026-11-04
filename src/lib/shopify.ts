@@ -76,7 +76,7 @@ export const MOCK_PRODUCTS: Product[] = [
   {
     id: "elyne-prod-01",
     handle: "classic-white-kandura",
-    title: "Classic White Kandura",
+    title: "Classic White Thobe",
     description: "Tailored to immaculate standards from crisp breathable Japanese crepe fabric. Features traditional Emirati single-stitch placket and signature understated drape.",
     price: {
       amount: "599",
@@ -84,12 +84,12 @@ export const MOCK_PRODUCTS: Product[] = [
     },
     featuredImage: {
       url: "/images/product-classic-white.webp",
-      altText: "Classic White Kandura - Emirati Menswear",
+      altText: "Classic White Thobe - Emirati Menswear",
       width: 600,
       height: 750
     },
     images: [
-      { url: "/images/product-classic-white.webp", altText: "Classic White Kandura - Front Studio View" },
+      { url: "/images/product-classic-white.webp", altText: "Classic White Thobe - Front Studio View" },
       { url: "/images/story-philosophy-collar-hq.jpg", altText: "Collar & Single-Needle Precision Stitching Detail" },
       { url: "/images/craft-fabric.webp", altText: "Japanese Toyobo Crepe Textile Weave" },
       { url: "/images/story-hero-model-hq.jpg", altText: "Editorial Campaign Drape & Silhouette" }
@@ -109,7 +109,7 @@ export const MOCK_PRODUCTS: Product[] = [
   {
     id: "elyne-prod-02",
     handle: "sand-beige-kandura",
-    title: "Sand Beige Kandura",
+    title: "Sand Beige Thobe",
     description: "Evoking the warm tones of the Arabian desert dunes. Crafted from lightweight premium textured poly-wool blend with hand-finished collar detailing.",
     price: {
       amount: "649",
@@ -117,12 +117,12 @@ export const MOCK_PRODUCTS: Product[] = [
     },
     featuredImage: {
       url: "/images/product-sand-beige.webp",
-      altText: "Sand Beige Kandura - Emirati Menswear",
+      altText: "Sand Beige Thobe - Emirati Menswear",
       width: 600,
       height: 750
     },
     images: [
-      { url: "/images/product-sand-beige.webp", altText: "Sand Beige Kandura - Front View" },
+      { url: "/images/product-sand-beige.webp", altText: "Sand Beige Thobe - Front View" },
       { url: "/images/kids-beige-collar-detail.jpg", altText: "Desert Sand Braided Tassel & Collar Detail" },
       { url: "/images/campaign-banner-hq.jpg", altText: "Desert Dune Architectural Lighting" }
     ],
@@ -141,7 +141,7 @@ export const MOCK_PRODUCTS: Product[] = [
   {
     id: "elyne-prod-03",
     handle: "forest-green-kandura",
-    title: "Forest Green Kandura",
+    title: "Forest Green Thobe",
     description: "The signature ELYNE LUXE hue. A deep, distinguished forest green woven from high-twist luxury Japanese yarns with immaculate French seam finishing.",
     price: {
       amount: "649",
@@ -149,12 +149,12 @@ export const MOCK_PRODUCTS: Product[] = [
     },
     featuredImage: {
       url: "/images/product-forest-green.webp",
-      altText: "Forest Green Kandura - Signature ELYNE LUXE Collection",
+      altText: "Forest Green Thobe - Signature ELYNE LUXE Collection",
       width: 600,
       height: 750
     },
     images: [
-      { url: "/images/product-forest-green.webp", altText: "Forest Green Kandura - Front View" },
+      { url: "/images/product-forest-green.webp", altText: "Forest Green Thobe - Front View" },
       { url: "/images/kids-forest-green.jpg", altText: "Signature Forest Green Hue in Natural Light" },
       { url: "/images/craft-stitching.webp", altText: "French Seam Craftsmanship Detail" }
     ],
@@ -173,7 +173,7 @@ export const MOCK_PRODUCTS: Product[] = [
   {
     id: "elyne-prod-04",
     handle: "premium-white-kandura",
-    title: "Premium White Kandura",
+    title: "Premium White Thobe",
     description: "The pinnacle of Emirati bespoke elegance. Ultra-fine Japanese twill weave, subtle hand-pressed cuffs, and mother-of-pearl buttons.",
     price: {
       amount: "699",
@@ -181,12 +181,12 @@ export const MOCK_PRODUCTS: Product[] = [
     },
     featuredImage: {
       url: "/images/product-premium-white.webp",
-      altText: "Premium White Kandura - Bespoke Craftsmanship",
+      altText: "Premium White Thobe - Bespoke Craftsmanship",
       width: 600,
       height: 750
     },
     images: [
-      { url: "/images/product-premium-white.webp", altText: "Premium White Kandura Front View" },
+      { url: "/images/product-premium-white.webp", altText: "Premium White Thobe Front View" },
       { url: "/images/story-philosophy-collar-hq.jpg", altText: "Master Tailored Stand Collar Detail" },
       { url: "/images/craft-cuff.webp", altText: "Mother-of-Pearl Cuff Finish" },
       { url: "/images/craft-fabric.webp", altText: "Toyobo Twill Texture" }

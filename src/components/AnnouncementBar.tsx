@@ -13,7 +13,7 @@ export default function AnnouncementBar() {
         <div className="flex-1 flex items-center justify-center sm:justify-start gap-2 text-center sm:text-left">
           <Truck className="w-3.5 h-3.5 text-[#C2A676] shrink-0 hidden sm:inline-block" />
           <span className="font-light">
-            UAE Delivery <span className="text-[#C2A676]/60 mx-1">|</span> Premium Kanduras for Men & Boys <span className="text-[#C2A676]/60 mx-1">|</span>{" "}
+            UAE Delivery <span className="text-[#C2A676]/60 mx-1">|</span> Premium Thobes for Men & Boys <span className="text-[#C2A676]/60 mx-1">|</span>{" "}
             <a
               href="#best-sellers"
               className="underline underline-offset-4 decoration-[#C2A676]/40 hover:text-[#C2A676] transition-colors"

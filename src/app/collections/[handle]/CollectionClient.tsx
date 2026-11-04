@@ -57,7 +57,7 @@ const COLLECTION_DATA: Record<string, CollectionMeta> = {
     heroImage: "/images/boys-luxury-thobe.png"
   },
   "emirati-thobes": {
-    titleEn: "EMIRATI KANDURAS",
+    titleEn: "EMIRATI THOBES",
     titleAr: "الكنادير الإماراتية الأصيلة",
     descEn: "Signature handcrafted silhouettes featuring clean single-needle plackets, authentic Tarboosh details, and Japanese Toyobo textiles.",
     descAr: "كنادير إماراتية أصيلة مفصلة بحرفية يدوية مع تفاصيل الطربوش التراثي وأرقى أقمشة التويوبو اليابانية.",
@@ -143,7 +143,7 @@ export default function CollectionClient({
   const meta = COLLECTION_DATA[handle] || {
     titleEn: handle.replace(/-/g, " ").toUpperCase(),
     titleAr: "تشكيلة إيلين لوكس الفاخرة",
-    descEn: "Curated collection of bespoke Emirati Kanduras and luxury Middle Eastern fashion.",
+    descEn: "Curated collection of bespoke Emirati Thobes and luxury Middle Eastern fashion.",
     descAr: "مختارات فاخرة من الكنادير الإماراتية الأصيلة والأزياء الرجالية الراقية.",
     heroImage: "/images/campaign-banner-hq.jpg"
   };
