@@ -9,55 +9,68 @@ import { ArabianGeometricWatermark } from "./ArabianGeometricMotif";
 
 export default function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const { t, isRtl } = useCart();
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        setVideoError(true);
-      });
-    }
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Ensure seamless smooth loop without stutter
+    const handleCanPlay = () => {
+      setVideoLoaded(true);
+      video.play().catch(() => setVideoError(true));
+    };
+
+    video.addEventListener("canplaythrough", handleCanPlay);
+    video.play().catch(() => {
+      // autoplay might be deferred until user interaction or ready
+    });
+
+    return () => {
+      video.removeEventListener("canplaythrough", handleCanPlay);
+    };
   }, []);
 
   return (
     <section className="relative w-full h-[92vh] sm:h-[95vh] lg:h-screen min-h-[640px] max-h-[1080px] bg-[#161F1A] overflow-hidden flex items-center">
       {/* Background Media: Video with Poster Fallback */}
-      <div className="absolute inset-0 w-full h-full">
-        {!videoError ? (
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        {!videoError && (
           <video
             ref={videoRef}
             autoPlay
             muted
             loop
             playsInline
+            preload="auto"
             poster="/images/elyne-hero-desktop-hq.jpg"
+            onPlaying={() => setVideoLoaded(true)}
             onError={() => setVideoError(true)}
-            className="w-full h-full object-cover object-top brightness-[0.88] transition-opacity duration-1000 scale-100"
+            className={`w-full h-full object-cover object-center transition-opacity duration-1000 ease-in-out ${
+              videoLoaded ? "opacity-100" : "opacity-0"
+            }`}
           >
-            <source src="/videos/elyne-hero-desktop.mp4" type="video/mp4" media="(min-width: 768px)" />
-            <source src="/videos/elyne-hero-mobile.mp4" type="video/mp4" media="(max-width: 767px)" />
+            <source src="/videos/elyne-hero-desktop.mp4" type="video/mp4" />
           </video>
-        ) : null}
+        )}
 
         {/* Fallback & Initial Poster Image */}
-        <div className={`absolute inset-0 w-full h-full ${!videoError ? "opacity-0" : "opacity-100"} transition-opacity duration-700`}>
+        <div
+          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+            videoLoaded && !videoError ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+        >
           <Image
             src="/images/elyne-hero-desktop-hq.jpg"
             alt="ELYNE LUXE Emirati Menswear Campaign"
             fill
             priority
-            className="object-cover object-center lg:object-[center_top] brightness-[0.85]"
+            className="object-cover object-center lg:object-[center_top]"
           />
         </div>
-
-        {/* Cinematic Gradient Overlays to preserve legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-black/80 via-black/45 via-45% to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 pointer-events-none" />
-        
-        {/* Subtle Arabian Geometric Watermark */}
-        <ArabianGeometricWatermark opacity={0.03} />
       </div>
 
       {/* Hero Content positioned ~7% from left/right */}
@@ -88,7 +101,7 @@ export default function HeroVideo() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.4 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-medium leading-[1.08] tracking-[0.14em] text-[#F9F5EF] uppercase mb-4 sm:mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-medium leading-[1.08] tracking-[0.14em] text-[#F9F5EF] uppercase mb-4 sm:mb-6 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
           >
             {t.hero.headlinePart1}
             <br />
@@ -100,7 +113,7 @@ export default function HeroVideo() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xs sm:text-sm md:text-base font-light tracking-[0.18em] uppercase text-[#F9F5EF]/85 mb-8 sm:mb-10 max-w-md leading-relaxed"
+            className="text-xs sm:text-sm md:text-base font-light tracking-[0.18em] uppercase text-[#F9F5EF] mb-8 sm:mb-10 max-w-md leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
           >
             {t.hero.tagline}
           </motion.p>
@@ -113,7 +126,7 @@ export default function HeroVideo() {
           >
             <a
               href="#best-sellers"
-              className="inline-flex items-center space-x-3 rtl:space-x-reverse px-7 sm:px-9 py-3.5 sm:py-4 border border-[#F9F5EF]/90 text-[#F9F5EF] text-[11px] sm:text-xs tracking-[0.22em] font-medium uppercase hover:bg-[#F9F5EF] hover:text-[#1F2A24] transition-all duration-300 group shadow-lg"
+              className="inline-flex items-center space-x-3 rtl:space-x-reverse px-7 sm:px-9 py-3.5 sm:py-4 border border-[#F9F5EF] bg-black/20 backdrop-blur-xs text-[#F9F5EF] text-[11px] sm:text-xs tracking-[0.22em] font-medium uppercase hover:bg-[#F9F5EF] hover:text-[#1F2A24] transition-all duration-300 group shadow-xl"
             >
               <span>{t.hero.cta}</span>
               <ArrowIcon className="w-3.5 h-3.5 transform group-hover:translate-x-1.5 rtl:group-hover:-translate-x-1.5 transition-transform duration-300" />
