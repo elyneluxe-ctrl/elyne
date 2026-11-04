@@ -68,19 +68,23 @@ export default function HeroVideo() {
           preload="auto"
           className="hidden md:block w-full h-full object-cover object-center filter contrast-[1.04] saturate-[1.05] brightness-[1.02]"
         />
+
+        {/* Ambient Gradient Overlays for Luxury Contrast & Mobile Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/25 md:from-black/70 md:via-black/20 md:to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent md:from-black/60 md:via-transparent pointer-events-none" />
       </div>
 
       {/* Hero Content positioned ~7% from left/right */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 flex flex-col justify-center h-full pt-16 sm:pt-20">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-10 lg:px-14 flex flex-col justify-end md:justify-center h-full pb-20 md:pb-0 pt-20 sm:pt-20">
         <div className="max-w-xl text-left rtl:text-right">
           {/* Brand Emblem & Tag */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex items-center space-x-3 rtl:space-x-reverse mb-3 sm:mb-4"
+            className="flex items-center space-x-2.5 rtl:space-x-reverse mb-2 sm:mb-4"
           >
-            <div className="w-8 h-4 relative opacity-90">
+            <div className="w-6 h-3.5 sm:w-8 sm:h-4 relative opacity-90">
               <Image
                 src="/images/elyne-luxe-emblem-white.png"
                 alt="Emblem"
@@ -88,7 +92,7 @@ export default function HeroVideo() {
                 className="object-contain object-left rtl:object-right"
               />
             </div>
-            <span className="text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase text-[#B99A65]">
+            <span className="text-[10px] sm:text-sm font-semibold tracking-[0.28em] sm:tracking-[0.3em] uppercase text-[#B99A65]">
               {t.hero.brandName}
             </span>
           </motion.div>
@@ -98,7 +102,7 @@ export default function HeroVideo() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.4 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-medium leading-[1.08] tracking-[0.14em] text-[#F9F5EF] uppercase mb-4 sm:mb-6 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
+            className="text-[26px] xs:text-3xl sm:text-5xl md:text-6xl lg:text-[68px] font-medium leading-[1.18] sm:leading-[1.08] tracking-[0.1em] sm:tracking-[0.14em] text-[#F9F5EF] uppercase mb-2.5 sm:mb-6 drop-shadow-[0_2px_16px_rgba(0,0,0,0.8)]"
           >
             {t.hero.headlinePart1}
             <br />
@@ -110,7 +114,7 @@ export default function HeroVideo() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xs sm:text-sm md:text-base font-light tracking-[0.18em] uppercase text-[#F9F5EF] mb-8 sm:mb-10 max-w-md leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
+            className="text-[11px] sm:text-sm md:text-base font-light tracking-[0.16em] sm:tracking-[0.18em] uppercase text-[#F9F5EF]/90 mb-6 sm:mb-10 max-w-md leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
           >
             {t.hero.tagline}
           </motion.p>
@@ -123,7 +127,7 @@ export default function HeroVideo() {
           >
             <a
               href="#best-sellers"
-              className="inline-flex items-center space-x-3 rtl:space-x-reverse px-7 sm:px-9 py-3.5 sm:py-4 border border-[#F9F5EF] bg-black/20 backdrop-blur-xs text-[#F9F5EF] text-[11px] sm:text-xs tracking-[0.22em] font-medium uppercase hover:bg-[#F9F5EF] hover:text-[#1F2A24] transition-all duration-300 group shadow-xl"
+              className="inline-flex items-center space-x-2.5 sm:space-x-3 rtl:space-x-reverse px-6 sm:px-9 py-3 sm:py-4 border border-[#F9F5EF]/80 bg-black/40 backdrop-blur-md text-[#F9F5EF] text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.22em] font-medium uppercase hover:bg-[#F9F5EF] hover:text-[#1F2A24] transition-all duration-300 group shadow-xl"
             >
               <span>{t.hero.cta}</span>
               <ArrowIcon className="w-3.5 h-3.5 transform group-hover:translate-x-1.5 rtl:group-hover:-translate-x-1.5 transition-transform duration-300" />
@@ -137,7 +141,7 @@ export default function HeroVideo() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
-        className="absolute bottom-6 sm:bottom-10 left-6 sm:left-10 lg:left-14 rtl:left-auto rtl:right-6 rtl:sm:right-10 rtl:lg:right-14 z-10 flex flex-col items-start rtl:items-end text-[#F9F5EF]/70 select-none"
+        className="hidden md:flex absolute bottom-6 sm:bottom-10 left-6 sm:left-10 lg:left-14 rtl:left-auto rtl:right-6 rtl:sm:right-10 rtl:lg:right-14 z-10 flex-col items-start rtl:items-end text-[#F9F5EF]/70 select-none"
       >
         <div className="w-[1px] h-10 bg-gradient-to-b from-transparent via-[#F9F5EF]/50 to-[#F9F5EF] mb-2 animate-pulse" />
         <span className="text-[10px] tracking-[0.25em] font-medium uppercase text-[#B99A65]">
