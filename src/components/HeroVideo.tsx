@@ -55,7 +55,7 @@ export default function HeroVideo() {
           className="block md:hidden w-full h-full object-cover object-center filter contrast-[1.04] saturate-[1.05] brightness-[1.02]"
         />
 
-        {/* Desktop View Video (>= 768px): Cinematic widescreen campaign */}
+        {/* Desktop View Video (>= 768px): Enhanced TensorPix widescreen video */}
         <video
           ref={desktopVideoRef}
           src="/videos/elyne-hero-desktop.mp4"
@@ -66,7 +66,7 @@ export default function HeroVideo() {
           controls={false}
           disablePictureInPicture
           preload="auto"
-          className="hidden md:block w-full h-full object-cover object-center filter contrast-[1.04] saturate-[1.05] brightness-[1.02]"
+          className="hidden md:block w-full h-full object-cover object-center transform-gpu will-change-transform filter contrast-[1.03] saturate-[1.03]"
         />
 
         {/* Ambient Gradient Overlays for Luxury Contrast & Mobile Readability */}
