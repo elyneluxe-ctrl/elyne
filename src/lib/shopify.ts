@@ -1,3 +1,13 @@
+export interface SelectedOption {
+  name: string;
+  value: string;
+}
+
+export interface ProductOption {
+  name: string;
+  values: string[];
+}
+
 export interface ProductVariant {
   id: string;
   title: string;
@@ -6,6 +16,7 @@ export interface ProductVariant {
     currencyCode: string;
   };
   availableForSale: boolean;
+  selectedOptions?: SelectedOption[];
 }
 
 export interface ProductImage {
@@ -31,6 +42,7 @@ export interface Product {
   featuredImage: ProductImage;
   images: ProductImage[];
   variants: ProductVariant[];
+  options?: ProductOption[];
   availableForSale: boolean;
   category?: 'men' | 'boys' | 'bestsellers' | 'kids' | 'premium';
   availableSizes?: string[];
@@ -561,13 +573,17 @@ export async function getProductByHandle(handle: string): Promise<Product | null
         title
         description
         availableForSale
+        options {
+          name
+          values
+        }
         priceRange {
           minVariantPrice {
             amount
             currencyCode
           }
         }
-        images(first: 6) {
+        images(first: 10) {
           edges {
             node {
               url
@@ -577,12 +593,16 @@ export async function getProductByHandle(handle: string): Promise<Product | null
             }
           }
         }
-        variants(first: 20) {
+        variants(first: 50) {
           edges {
             node {
               id
               title
               availableForSale
+              selectedOptions {
+                name
+                value
+              }
               price {
                 amount
                 currencyCode
@@ -601,6 +621,10 @@ export async function getProductByHandle(handle: string): Promise<Product | null
       title: string;
       description: string;
       availableForSale: boolean;
+      options: Array<{
+        name: string;
+        values: string[];
+      }>;
       priceRange: {
         minVariantPrice: {
           amount: string;
@@ -623,6 +647,10 @@ export async function getProductByHandle(handle: string): Promise<Product | null
             id: string;
             title: string;
             availableForSale: boolean;
+            selectedOptions: Array<{
+              name: string;
+              value: string;
+            }>;
             price: {
               amount: string;
               currencyCode: string;
@@ -660,16 +688,20 @@ export async function getProductByHandle(handle: string): Promise<Product | null
         url: img.node.url,
         altText: img.node.altText
       })),
+      options: p.options.filter(opt => opt.name !== "Title" || opt.values.some(v => v !== "Default Title")),
       variants: p.variants.edges.map(v => ({
         id: v.node.id,
         title: v.node.title,
         availableForSale: v.node.availableForSale,
+        selectedOptions: v.node.selectedOptions,
         price: {
           amount: Math.round(parseFloat(v.node.price.amount)).toString(),
           currencyCode: v.node.price.currencyCode || "AED"
         }
       })),
-      availableSizes: p.variants.edges.map(v => v.node.title.replace("Size ", ""))
+      availableSizes: p.variants.edges
+        .map(v => v.node.title.replace("Size ", ""))
+        .filter(t => t !== "Default Title")
     };
   }
 

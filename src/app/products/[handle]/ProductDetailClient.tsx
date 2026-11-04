@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,6 +33,7 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
   const [loading, setLoading] = useState(true);
 
   // Active selection states
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
@@ -49,9 +50,23 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
         const prod = await getProductByHandle(handle);
         if (prod) {
           setProduct(prod);
+
+          // Initialize selected options dynamically from product.options or variants
+          const initialOptions: Record<string, string> = {};
+          if (prod.options && prod.options.length > 0) {
+            prod.options.forEach((opt) => {
+              if (opt.values && opt.values.length > 0) {
+                initialOptions[opt.name] = opt.values[0];
+              }
+            });
+          }
+
           if (prod.availableSizes && prod.availableSizes.length > 0) {
             setSelectedSize(prod.availableSizes[0]);
+            initialOptions["Size"] = prod.availableSizes[0];
           }
+
+          setSelectedOptions(initialOptions);
         }
         const bestSellers = await getBestSellerProducts();
         setRelatedProducts(bestSellers.filter((p) => p.handle !== handle).slice(0, 4));
@@ -108,15 +123,44 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
   const images = product.images && product.images.length > 0 ? product.images : [product.featuredImage];
   const activeImage = images[activeImageIndex] || product.featuredImage;
 
+  // Find currently matched variant based on selected options or size
+  const currentVariant = useMemo(() => {
+    if (!product || !product.variants || product.variants.length === 0) return null;
+
+    // Check if variant has selectedOptions
+    const optionKeys = Object.keys(selectedOptions);
+    if (optionKeys.length > 0) {
+      const match = product.variants.find((v) => {
+        if (v.selectedOptions && v.selectedOptions.length > 0) {
+          return v.selectedOptions.every(
+            (opt) => selectedOptions[opt.name] === opt.value
+          );
+        }
+        return false;
+      });
+      if (match) return match;
+    }
+
+    // Fallback: match by title / size
+    if (selectedSize) {
+      const sizeMatch = product.variants.find(
+        (v) => v.title === selectedSize || v.title.includes(selectedSize)
+      );
+      if (sizeMatch) return sizeMatch;
+    }
+
+    return product.variants[0];
+  }, [product, selectedOptions, selectedSize]);
+
+  const displayPrice = currentVariant ? currentVariant.price : product.price;
+
   const handleAddToCart = () => {
-    const selectedVariant =
-      product.variants.find((v) => v.title.includes(selectedSize)) ||
-      product.variants[0] || {
-        id: `var-${product.id}-${selectedSize || "default"}`,
-        title: selectedSize ? `Size ${selectedSize}` : "Default",
-        price: product.price,
-        availableForSale: true
-      };
+    const selectedVariant = currentVariant || product.variants[0] || {
+      id: `var-${product.id}-${selectedSize || "default"}`,
+      title: selectedSize ? `Size ${selectedSize}` : "Default",
+      price: product.price,
+      availableForSale: true
+    };
 
     addToCart(product, selectedVariant.id, quantity);
     setAddedAnimation(true);
@@ -129,14 +173,12 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
     setIsBuyingNow(true);
 
     try {
-      const selectedVariant =
-        product.variants.find((v) => v.title.includes(selectedSize)) ||
-        product.variants[0] || {
-          id: `var-${product.id}-${selectedSize || "default"}`,
-          title: selectedSize ? `Size ${selectedSize}` : "Default",
-          price: product.price,
-          availableForSale: true
-        };
+      const selectedVariant = currentVariant || product.variants[0] || {
+        id: `var-${product.id}-${selectedSize || "default"}`,
+        title: selectedSize ? `Size ${selectedSize}` : "Default",
+        price: product.price,
+        availableForSale: true
+      };
 
       // Add to local state so cart is persistent
       addToCart(product, selectedVariant.id, quantity);
@@ -320,7 +362,7 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
             {/* Pricing */}
             <div className="flex items-baseline space-x-3 rtl:space-x-reverse mb-6">
               <span className="text-xl sm:text-2xl font-normal text-[#1F2A24] tracking-wider">
-                {t.nav.currency} {product.price.amount}
+                {t.nav.currency} {displayPrice.amount}
               </span>
               <span className="text-[11px] text-[#5A605C] tracking-wide font-light">
                 {isRtl ? "(شامل ضريبة القيمة المضافة)" : "(Inclusive of VAT)"}
@@ -332,8 +374,59 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
               {product.description}
             </p>
 
-            {/* Size Selection */}
-            {product.availableSizes && product.availableSizes.length > 0 && (
+            {/* Dynamic Shopify Options: Colors, Sizes, Fits, etc. */}
+            {product.options && product.options.length > 0 ? (
+              <div className="space-y-6 mb-6">
+                {product.options.map((option) => {
+                  const isSizeOption = option.name.toLowerCase().includes("size") || option.name.toLowerCase().includes("length");
+                  const currentValue = selectedOptions[option.name] || option.values[0];
+
+                  return (
+                    <div key={option.name}>
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-xs font-semibold tracking-[0.16em] uppercase text-[#1F2A24]">
+                          {option.name}: <span className="font-light text-[#5A605C]">{currentValue}</span>
+                        </span>
+                        {isSizeOption && (
+                          <button
+                            onClick={() => setShowSizeGuide(!showSizeGuide)}
+                            className="inline-flex items-center space-x-1 rtl:space-x-reverse text-[11px] font-medium tracking-wider text-[#B99A65] hover:text-[#1F2A24] transition-colors"
+                          >
+                            <Ruler className="w-3.5 h-3.5" />
+                            <span>{isRtl ? "دليل المقاسات" : "SIZE GUIDE"}</span>
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Option Pills Grid */}
+                      <div className="flex flex-wrap gap-2">
+                        {option.values.map((val) => {
+                          const isSelected = currentValue === val;
+                          return (
+                            <button
+                              key={val}
+                              onClick={() => {
+                                setSelectedOptions((prev) => ({ ...prev, [option.name]: val }));
+                                if (isSizeOption) {
+                                  setSelectedSize(val);
+                                }
+                              }}
+                              className={`px-4 py-2.5 text-xs tracking-wider font-medium border transition-all ${
+                                isSelected
+                                  ? "bg-[#1F2A24] text-[#F9F5EF] border-[#1F2A24] shadow-sm"
+                                  : "bg-white text-[#1F2A24] border-[#DCD5C7] hover:border-[#1F2A24]"
+                              }`}
+                            >
+                              {val}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : product.availableSizes && product.availableSizes.length > 0 ? (
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs font-semibold tracking-[0.16em] uppercase text-[#1F2A24]">
@@ -365,7 +458,7 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
                   ))}
                 </div>
               </div>
-            )}
+            ) : null}
 
             {/* Size Guide Modal/Accordion Popup */}
             {showSizeGuide && (
