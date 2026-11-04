@@ -13,45 +13,63 @@ export default function HeroVideo() {
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
 
   useEffect(() => {
-    // Attempt play on mount and when DOM attaches
-    const playVideos = () => {
-      if (desktopVideoRef.current) {
-        desktopVideoRef.current.defaultMuted = true;
-        desktopVideoRef.current.muted = true;
-        desktopVideoRef.current.play().catch(() => {});
+    const desktopVideo = desktopVideoRef.current;
+    const mobileVideo = mobileVideoRef.current;
+
+    const startPlayback = () => {
+      if (desktopVideo) {
+        desktopVideo.defaultMuted = true;
+        desktopVideo.muted = true;
+        desktopVideo.play().catch(() => {});
       }
-      if (mobileVideoRef.current) {
-        mobileVideoRef.current.defaultMuted = true;
-        mobileVideoRef.current.muted = true;
-        mobileVideoRef.current.play().catch(() => {});
+      if (mobileVideo) {
+        mobileVideo.defaultMuted = true;
+        mobileVideo.muted = true;
+        mobileVideo.play().catch(() => {});
       }
     };
 
-    playVideos();
-    window.addEventListener("touchstart", playVideos, { once: true, passive: true });
-    window.addEventListener("click", playVideos, { once: true, passive: true });
+    // Immediate playback attempt
+    startPlayback();
+
+    // Listen on loadeddata & canplay events so video renders immediately as frames arrive
+    if (desktopVideo) {
+      desktopVideo.addEventListener("loadeddata", startPlayback, { once: true });
+      desktopVideo.addEventListener("canplay", startPlayback, { once: true });
+    }
+    if (mobileVideo) {
+      mobileVideo.addEventListener("loadeddata", startPlayback, { once: true });
+      mobileVideo.addEventListener("canplay", startPlayback, { once: true });
+    }
+
+    // Touch & interaction fallback to break browser autoplay throttling
+    window.addEventListener("touchstart", startPlayback, { once: true, passive: true });
+    window.addEventListener("click", startPlayback, { once: true, passive: true });
+    window.addEventListener("scroll", startPlayback, { once: true, passive: true });
 
     return () => {
-      window.removeEventListener("touchstart", playVideos);
-      window.removeEventListener("click", playVideos);
+      window.removeEventListener("touchstart", startPlayback);
+      window.removeEventListener("click", startPlayback);
+      window.removeEventListener("scroll", startPlayback);
     };
   }, []);
 
   return (
     <section className="relative w-full h-[92vh] sm:h-[95vh] lg:h-screen min-h-[640px] max-h-[1080px] bg-[#161F1A] overflow-hidden flex items-center">
       {/* Background Media: Native Responsive Videos for Desktop & Mobile */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
+      <div className="absolute inset-0 w-full h-full overflow-hidden bg-[#161F1A]">
         {/* Mobile View Video (< 768px): Enhanced TensorPix mobile video */}
         <video
           ref={mobileVideoRef}
           src="/videos/elyne-hero-mobile.mp4"
+          poster="/images/elyne-hero-desktop-hq.jpg"
           autoPlay
           muted
           loop
           playsInline
           controls={false}
           disablePictureInPicture
-          preload="auto"
+          preload="metadata"
           className="block md:hidden w-full h-full object-cover object-center transform-gpu will-change-transform filter contrast-[1.03] saturate-[1.03]"
         />
 
@@ -59,6 +77,7 @@ export default function HeroVideo() {
         <video
           ref={desktopVideoRef}
           src="/videos/elyne-hero-desktop.mp4"
+          poster="/images/elyne-hero-desktop-hq.jpg"
           autoPlay
           muted
           loop
