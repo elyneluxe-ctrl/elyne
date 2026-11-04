@@ -7,44 +7,67 @@ import { ArrowRight, ArrowLeft } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
 export default function HeroVideo() {
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
   const { t, isRtl } = useCart();
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+    // Attempt play on mount and when DOM attaches
+    const playVideos = () => {
+      if (desktopVideoRef.current) {
+        desktopVideoRef.current.defaultMuted = true;
+        desktopVideoRef.current.muted = true;
+        desktopVideoRef.current.play().catch(() => {});
+      }
+      if (mobileVideoRef.current) {
+        mobileVideoRef.current.defaultMuted = true;
+        mobileVideoRef.current.muted = true;
+        mobileVideoRef.current.play().catch(() => {});
+      }
     };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
-  useEffect(() => {
-    if (isMobile !== null && videoRef.current) {
-      videoRef.current.load();
-      videoRef.current.play().catch(() => {});
-    }
-  }, [isMobile]);
+    playVideos();
+    window.addEventListener("touchstart", playVideos, { once: true, passive: true });
+    window.addEventListener("click", playVideos, { once: true, passive: true });
+
+    return () => {
+      window.removeEventListener("touchstart", playVideos);
+      window.removeEventListener("click", playVideos);
+    };
+  }, []);
 
   return (
     <section className="relative w-full h-[92vh] sm:h-[95vh] lg:h-screen min-h-[640px] max-h-[1080px] bg-[#161F1A] overflow-hidden flex items-center">
-      {/* Background Media: Active Video Player based on viewport */}
+      {/* Background Media: Native Responsive Videos for Desktop & Mobile */}
       <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
-        {isMobile !== null && (
-          <video
-            key={isMobile ? "mobile-hero" : "desktop-hero"}
-            ref={videoRef}
-            src={isMobile ? "/videos/elyne-hero-mobile.mp4" : "/videos/elyne-hero-desktop.mp4"}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="w-full h-full object-cover object-center filter contrast-[1.04] saturate-[1.05] brightness-[1.02]"
-          />
-        )}
+        {/* Mobile View Video (< 768px): Dedicated vertical mobile campaign */}
+        <video
+          ref={mobileVideoRef}
+          src="/videos/elyne-hero-mobile.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls={false}
+          disablePictureInPicture
+          preload="auto"
+          className="block md:hidden w-full h-full object-cover object-center filter contrast-[1.04] saturate-[1.05] brightness-[1.02]"
+        />
+
+        {/* Desktop View Video (>= 768px): Cinematic widescreen campaign */}
+        <video
+          ref={desktopVideoRef}
+          src="/videos/elyne-hero-desktop.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls={false}
+          disablePictureInPicture
+          preload="auto"
+          className="hidden md:block w-full h-full object-cover object-center filter contrast-[1.04] saturate-[1.05] brightness-[1.02]"
+        />
       </div>
 
       {/* Hero Content positioned ~7% from left/right */}
