@@ -21,8 +21,8 @@ export default function HeroVideo() {
 
   return (
     <section className="relative w-full h-[92vh] sm:h-[95vh] lg:h-screen min-h-[640px] max-h-[1080px] bg-[#161F1A] overflow-hidden flex items-center">
-      {/* Background Media: Direct Video Only */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
+      {/* Background Media: Direct Video Only with Crisp Cinema Tone & Rendering */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
         <video
           ref={videoRef}
           autoPlay
@@ -30,7 +30,7 @@ export default function HeroVideo() {
           loop
           playsInline
           preload="auto"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center filter contrast-[1.06] saturate-[1.08] brightness-[1.02] transform-gpu will-change-transform scale-[1.005]"
         >
           <source src="/videos/elyne-hero-desktop.mp4" type="video/mp4" />
         </video>
