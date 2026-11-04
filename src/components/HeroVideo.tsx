@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { ArabianGeometricWatermark } from "./ArabianGeometricMotif";
 
 export default function HeroVideo() {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);

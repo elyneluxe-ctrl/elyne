@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
-import { ArabianGeometricWatermark } from "./ArabianGeometricMotif";
 
 export default function BrandIntroduction() {
   const { t, isRtl } = useCart();
@@ -22,9 +21,6 @@ export default function BrandIntroduction() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#F9F5EF]/65 via-[#F9F5EF]/35 to-[#F9F5EF]/75" />
       </div>
-
-      {/* Subtle Arabian Geometric Watermark */}
-      <ArabianGeometricWatermark opacity={0.03} />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 relative z-10">
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 md:gap-14">
