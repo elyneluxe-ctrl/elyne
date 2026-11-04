@@ -127,7 +127,7 @@ export default function ContactPage() {
                         : "Instant client care, styling inquiries & sizing support."}
                     </p>
                     <a
-                      href="https://wa.me/971501234567"
+                      href="https://wa.me/971509749780"
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex items-center space-x-1.5 rtl:space-x-reverse text-xs font-semibold tracking-wider text-[#1F2A24] hover:text-[#B99A65] transition-colors"
@@ -153,11 +153,11 @@ export default function ContactPage() {
                         : "Direct telephone support during atelier hours."}
                     </p>
                     <a
-                      href="tel:+97148005893"
+                      href="tel:+971509749780"
                       className="text-xs font-medium tracking-wide text-[#1F2A24] hover:text-[#B99A65] transition-colors"
                       dir="ltr"
                     >
-                      +971 4 800 LUXE (5893)
+                      +971 50 974 9780
                     </a>
                   </div>
                 </div>

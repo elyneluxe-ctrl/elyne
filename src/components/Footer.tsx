@@ -195,9 +195,9 @@ export default function Footer() {
               <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-[#B99A65] mb-4">
                 {t.footer.connect}
               </h3>
-              <div className="flex items-center space-x-4 rtl:space-x-reverse text-[#F9F5EF]/80">
+              <div className="flex items-center space-x-4 rtl:space-x-reverse text-[#F9F5EF]/80 mb-6">
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/elyne__luxe?rpxt=MXN6OTJ5b2c4NWZoNQ%3D%3D&utm_source=qr"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="ELYNE LUXE on Instagram"
@@ -232,6 +232,29 @@ export default function Footer() {
                 >
                   <YoutubeIcon className="w-4 h-4" />
                 </a>
+              </div>
+
+              {/* Direct Atelier Contact */}
+              <div className="space-y-2 text-xs font-light tracking-wide text-[#F9F5EF]/85">
+                <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                  <a
+                    href="tel:+971509749780"
+                    className="hover:text-[#B99A65] transition-colors font-medium text-[11px] tracking-widest text-[#B99A65]"
+                    dir="ltr"
+                  >
+                    +971 50 974 9780
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="https://wa.me/971509749780"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center space-x-1.5 rtl:space-x-reverse text-[#25D366] hover:underline text-[11px] tracking-wider"
+                  >
+                    <span>WhatsApp Concierge →</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
