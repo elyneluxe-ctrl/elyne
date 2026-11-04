@@ -7,7 +7,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCart } from "@/context/CartContext";
-import { Product, getProductByHandle, getBestSellerProducts } from "@/lib/shopify";
+import { Product, getProductByHandle, getBestSellerProducts, createShopifyCart } from "@/lib/shopify";
 import {
   Heart,
   Truck,
@@ -20,7 +20,8 @@ import {
   Check,
   Ruler,
   ShoppingBag,
-  MessageCircle
+  Zap,
+  Loader2
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -36,6 +37,7 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
   const [quantity, setQuantity] = useState<number>(1);
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
   const [addedAnimation, setAddedAnimation] = useState(false);
+  const [isBuyingNow, setIsBuyingNow] = useState(false);
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [activeAccordion, setActiveAccordion] = useState<string | null>("fabric");
 
@@ -122,11 +124,41 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
     openCart();
   };
 
-  const handleWhatsAppOrder = () => {
-    const text = encodeURIComponent(
-      `Hello ELYNE LUXE Concierge, I would like to inquire about ordering the ${product.title} (Size: ${selectedSize || "Custom"}, Price: AED ${product.price.amount}). Please guide me through bespoke fitting and delivery.`
-    );
-    window.open(`https://wa.me/971501234567?text=${text}`, "_blank");
+  const handleBuyNow = async () => {
+    if (!product) return;
+    setIsBuyingNow(true);
+
+    try {
+      const selectedVariant =
+        product.variants.find((v) => v.title.includes(selectedSize)) ||
+        product.variants[0] || {
+          id: `var-${product.id}-${selectedSize || "default"}`,
+          title: selectedSize ? `Size ${selectedSize}` : "Default",
+          price: product.price,
+          availableForSale: true
+        };
+
+      // Add to local state so cart is persistent
+      addToCart(product, selectedVariant.id, quantity);
+
+      // Attempt live Shopify Cart creation
+      const cart = await createShopifyCart([
+        {
+          merchandiseId: selectedVariant.id,
+          quantity
+        }
+      ]);
+
+      if (cart?.checkoutUrl) {
+        window.location.href = cart.checkoutUrl;
+        return;
+      }
+    } catch (err) {
+      console.warn("Direct checkout redirect fallback:", err);
+    }
+
+    const storeDomain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "elyneluxe.myshopify.com";
+    window.location.href = `https://${storeDomain}/cart`;
   };
 
   const handlePrevImage = () => {
@@ -410,13 +442,23 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
                 </button>
               </div>
 
-              {/* Express VIP WhatsApp Concierge Order Button */}
+              {/* Express Direct Checkout / Buy Now Button */}
               <button
-                onClick={handleWhatsAppOrder}
-                className="w-full h-12 border border-[#1F2A24] text-[#1F2A24] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#1F2A24] hover:text-[#F9F5EF] transition-all duration-300 flex items-center justify-center space-x-2 rtl:space-x-reverse bg-transparent"
+                onClick={handleBuyNow}
+                disabled={isBuyingNow}
+                className="w-full h-12 border-2 border-[#1F2A24] bg-[#F9F5EF] text-[#1F2A24] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#1F2A24] hover:text-[#F9F5EF] disabled:opacity-75 transition-all duration-300 flex items-center justify-center space-x-2 rtl:space-x-reverse cursor-pointer shadow-sm active:scale-[0.99]"
               >
-                <MessageCircle className="w-4 h-4 text-[#25D366]" />
-                <span>{isRtl ? "طلب خاص عبر مستشار واتساب" : "ORDER VIA WHATSAPP CONCIERGE"}</span>
+                {isBuyingNow ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>{isRtl ? "جاري التجهيز والدفع..." : "PROCEEDING TO CHECKOUT..."}</span>
+                  </>
+                ) : (
+                  <>
+                    <Zap className="w-4 h-4 text-[#B99A65] fill-[#B99A65]" />
+                    <span>{isRtl ? "اشتري الآن" : "BUY NOW"}</span>
+                  </>
+                )}
               </button>
             </div>
 
