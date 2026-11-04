@@ -9,68 +9,31 @@ import { ArabianGeometricWatermark } from "./ArabianGeometricMotif";
 
 export default function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [videoError, setVideoError] = useState(false);
   const { t, isRtl } = useCart();
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
-
-    // Ensure seamless smooth loop without stutter
-    const handleCanPlay = () => {
-      setVideoLoaded(true);
-      video.play().catch(() => setVideoError(true));
-    };
-
-    video.addEventListener("canplaythrough", handleCanPlay);
-    video.play().catch(() => {
-      // autoplay might be deferred until user interaction or ready
-    });
-
-    return () => {
-      video.removeEventListener("canplaythrough", handleCanPlay);
-    };
+    if (video) {
+      video.play().catch(() => {});
+    }
   }, []);
 
   return (
     <section className="relative w-full h-[92vh] sm:h-[95vh] lg:h-screen min-h-[640px] max-h-[1080px] bg-[#161F1A] overflow-hidden flex items-center">
-      {/* Background Media: Video with Poster Fallback */}
+      {/* Background Media: Direct Video Only */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        {!videoError && (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster="/images/elyne-hero-desktop-hq.jpg"
-            onPlaying={() => setVideoLoaded(true)}
-            onError={() => setVideoError(true)}
-            className={`w-full h-full object-cover object-center transition-opacity duration-1000 ease-in-out ${
-              videoLoaded ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <source src="/videos/elyne-hero-desktop.mp4" type="video/mp4" />
-          </video>
-        )}
-
-        {/* Fallback & Initial Poster Image */}
-        <div
-          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-            videoLoaded && !videoError ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="w-full h-full object-cover object-center"
         >
-          <Image
-            src="/images/elyne-hero-desktop-hq.jpg"
-            alt="ELYNE LUXE Emirati Menswear Campaign"
-            fill
-            priority
-            className="object-cover object-center lg:object-[center_top]"
-          />
-        </div>
+          <source src="/videos/elyne-hero-desktop.mp4" type="video/mp4" />
+        </video>
       </div>
 
       {/* Hero Content positioned ~7% from left/right */}
