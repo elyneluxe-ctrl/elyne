@@ -24,10 +24,24 @@ export default function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    const whatsappMessage = encodeURIComponent(
+      `*New Inquiry from Website*\n\n` +
+      `*Name:* ${formData.name}\n` +
+      `*Email:* ${formData.email}\n` +
+      `*Phone:* ${formData.phone}\n` +
+      `*Service/Subject:* ${formData.inquiryType}\n` +
+      `*Message:* ${formData.message}`
+    );
+
+    // Official WhatsApp number: +971 50 974 9780
+    const whatsappUrl = `https://wa.me/971509749780?text=${whatsappMessage}`;
+
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
-    }, 800);
+      window.open(whatsappUrl, "_blank");
+    }, 600);
   };
 
   return (
