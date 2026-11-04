@@ -2,6 +2,7 @@ export interface Translations {
   nav: {
     men: string;
     boys: string;
+    premium: string;
     collections: string;
     ourStory: string;
     contact: string;
@@ -179,6 +180,7 @@ export const translations: Record<"EN" | "AR", Translations> = {
     nav: {
       men: "MEN",
       boys: "BOYS",
+      premium: "PREMIUM",
       collections: "COLLECTIONS",
       ourStory: "OUR STORY",
       contact: "CONTACT",
@@ -378,6 +380,7 @@ export const translations: Record<"EN" | "AR", Translations> = {
     nav: {
       men: "رجال",
       boys: "أولاد",
+      premium: "المميزة",
       collections: "التشكيلات",
       ourStory: "قصتنا",
       contact: "تواصل معنا",

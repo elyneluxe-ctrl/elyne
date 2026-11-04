@@ -32,7 +32,7 @@ export interface Product {
   images: ProductImage[];
   variants: ProductVariant[];
   availableForSale: boolean;
-  category?: 'men' | 'boys' | 'bestsellers' | 'kids';
+  category?: 'men' | 'boys' | 'bestsellers' | 'kids' | 'premium';
   availableSizes?: string[];
 }
 
@@ -192,7 +192,7 @@ export const MOCK_PRODUCTS: Product[] = [
       { url: "/images/craft-fabric.webp", altText: "Toyobo Twill Texture" }
     ],
     availableForSale: true,
-    category: "bestsellers",
+    category: "premium",
     availableSizes: ["52", "54", "56", "58", "60", "62"],
     variants: [
       { id: "var-pw-52", title: "Size 52", price: { amount: "699", currencyCode: "AED" }, availableForSale: true },
@@ -201,6 +201,38 @@ export const MOCK_PRODUCTS: Product[] = [
       { id: "var-pw-58", title: "Size 58", price: { amount: "699", currencyCode: "AED" }, availableForSale: true },
       { id: "var-pw-60", title: "Size 60", price: { amount: "699", currencyCode: "AED" }, availableForSale: true },
       { id: "var-pw-62", title: "Size 62", price: { amount: "699", currencyCode: "AED" }, availableForSale: true }
+    ]
+  },
+  {
+    id: "elyne-prod-05",
+    handle: "royal-imperial-gold-kandura",
+    title: "Royal Imperial Kandura",
+    description: "Couture-tier limited edition kandura. Tailored with gold-thread inner collar embroidery, bespoke Japanese silk-cotton blend, and precision hand-crafted Tarboosh.",
+    price: {
+      amount: "899",
+      currencyCode: "AED"
+    },
+    featuredImage: {
+      url: "/images/collection-men-luxury.jpg",
+      altText: "Royal Imperial Kandura - ELYNE LUXE Haute Couture",
+      width: 600,
+      height: 750
+    },
+    images: [
+      { url: "/images/collection-men-luxury.jpg", altText: "Royal Imperial Kandura Editorial View" },
+      { url: "/images/craft-collar-hq.jpg", altText: "Couture Stand Collar & Gold Detailing" },
+      { url: "/images/craft-stitching-hq.jpg", altText: "Master Tailoring Stitches" }
+    ],
+    availableForSale: true,
+    category: "premium",
+    availableSizes: ["52", "54", "56", "58", "60", "62"],
+    variants: [
+      { id: "var-ri-52", title: "Size 52", price: { amount: "899", currencyCode: "AED" }, availableForSale: true },
+      { id: "var-ri-54", title: "Size 54", price: { amount: "899", currencyCode: "AED" }, availableForSale: true },
+      { id: "var-ri-56", title: "Size 56", price: { amount: "899", currencyCode: "AED" }, availableForSale: true },
+      { id: "var-ri-58", title: "Size 58", price: { amount: "899", currencyCode: "AED" }, availableForSale: true },
+      { id: "var-ri-60", title: "Size 60", price: { amount: "899", currencyCode: "AED" }, availableForSale: true },
+      { id: "var-ri-62", title: "Size 62", price: { amount: "899", currencyCode: "AED" }, availableForSale: true }
     ]
   }
 ];

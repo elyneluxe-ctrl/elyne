@@ -49,6 +49,13 @@ const COLLECTION_DATA: Record<string, CollectionMeta> = {
     descAr: "تصاميم أصيلة ومريحة بأقمشة ناعمة تلائم بهجة المناسبات وأناقة فرسان الغد.",
     heroImage: "/images/boys-luxury-thobe.png"
   },
+  "premium": {
+    titleEn: "PREMIUM COUTURE THOBES",
+    titleAr: "كنادير الهوت كوتور الفاخرة",
+    descEn: "Exclusive small-batch couture tailoring utilizing rare Japanese micro-twill and genuine mother-of-pearl buttons.",
+    descAr: "إصدارات خاصة ومحدودة مصنوعة من خيوط المايكروتويول اليابانية النادرة مع أزرار صدفية طبيعية.",
+    heroImage: "/images/product-premium-white.webp"
+  },
   "premium-thobes": {
     titleEn: "PREMIUM COUTURE THOBES",
     titleAr: "كنادير الهوت كوتور الفاخرة",
@@ -102,8 +109,12 @@ export default function CollectionClient({ handle }: { handle: string }) {
 
   const allProducts: Product[] = useMemo(() => {
     if (handle === "boys" || handle === "kids-thobes") {
-      const boysList = MOCK_PRODUCTS.filter((p) => p.category === "boys");
+      const boysList = MOCK_PRODUCTS.filter((p) => p.category === "boys" || p.category === "kids");
       return boysList.length > 0 ? boysList : MOCK_PRODUCTS;
+    }
+    if (handle === "premium" || handle === "premium-thobes") {
+      const premList = MOCK_PRODUCTS.filter((p) => p.category === "premium");
+      return premList.length > 0 ? premList : MOCK_PRODUCTS;
     }
     if (handle === "best-sellers") {
       return MOCK_PRODUCTS.filter((p) => p.category === "bestsellers" || p.category === "men");
