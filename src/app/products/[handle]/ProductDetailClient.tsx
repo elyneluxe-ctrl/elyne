@@ -39,7 +39,6 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
   const [addedAnimation, setAddedAnimation] = useState(false);
   const [isBuyingNow, setIsBuyingNow] = useState(false);
-  const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [activeAccordion, setActiveAccordion] = useState<string | null>("fabric");
 
   useEffect(() => {
@@ -387,15 +386,6 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
                         <span className="text-xs font-semibold tracking-[0.16em] uppercase text-[#1F2A24]">
                           {option.name}: <span className="font-light text-[#5A605C]">{currentValue}</span>
                         </span>
-                        {isSizeOption && (
-                          <button
-                            onClick={() => setShowSizeGuide(!showSizeGuide)}
-                            className="inline-flex items-center space-x-1 rtl:space-x-reverse text-[11px] font-medium tracking-wider text-[#B99A65] hover:text-[#1F2A24] transition-colors"
-                          >
-                            <Ruler className="w-3.5 h-3.5" />
-                            <span>{isRtl ? "دليل المقاسات" : "SIZE GUIDE"}</span>
-                          </button>
-                        )}
                       </div>
 
                       {/* Option Pills Grid */}
@@ -432,13 +422,6 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
                   <span className="text-xs font-semibold tracking-[0.16em] uppercase text-[#1F2A24]">
                     {isRtl ? "اختر المقاس (طول الثوب)" : "SELECT SIZE (THOBE LENGTH)"}
                   </span>
-                  <button
-                    onClick={() => setShowSizeGuide(!showSizeGuide)}
-                    className="inline-flex items-center space-x-1 rtl:space-x-reverse text-[11px] font-medium tracking-wider text-[#B99A65] hover:text-[#1F2A24] transition-colors"
-                  >
-                    <Ruler className="w-3.5 h-3.5" />
-                    <span>{isRtl ? "دليل المقاسات" : "SIZE GUIDE"}</span>
-                  </button>
                 </div>
 
                 {/* Size Pills Grid */}
@@ -460,39 +443,19 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
               </div>
             ) : null}
 
-            {/* Size Guide Modal/Accordion Popup */}
-            {showSizeGuide && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 bg-[#F2EDE2] border border-[#DDD6C8] text-xs text-[#4A524D] leading-relaxed"
-              >
-                <div className="flex justify-between items-center mb-2 font-semibold text-[#1F2A24] tracking-wider uppercase">
-                  <span>{isRtl ? "دليل المقاسات الإماراتي التقليدي" : "Traditional Emirati Sizing Guide"}</span>
-                  <button
-                    onClick={() => setShowSizeGuide(false)}
-                    className="text-[#1F2A24] hover:text-[#B99A65]"
-                  >
-                    ✕
-                  </button>
-                </div>
-                <p className="text-[11px] mb-2 font-light">
+            {/* Quantity Selector & Add to Bag Buttons */}
+            {/* Live Inventory Stock Urgency Notice */}
+            {currentVariant && typeof currentVariant.quantityAvailable === "number" && currentVariant.quantityAvailable > 0 && currentVariant.quantityAvailable < 5 && (
+              <div className="flex items-center space-x-2 rtl:space-x-reverse text-xs text-[#B99A65] bg-[#B99A65]/10 border border-[#B99A65]/30 px-3.5 py-2.5 rounded-xs mb-4">
+                <span className="w-2 h-2 rounded-full bg-[#B99A65] animate-pulse shrink-0" />
+                <span className="font-medium">
                   {isRtl
-                    ? "مقاسات الثوب توافق الطول الإجمالي بالبوصة من الكتف إلى الكاحل."
-                    : "Thobe sizes correspond to your height in inches from shoulder to ankle."}
-                </p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-[10.5px]">
-                  <span>• {isRtl ? "مقاس 52: الطول 160 – 165 سم" : "Size 52: Height 160 – 165 cm"}</span>
-                  <span>• {isRtl ? "مقاس 54: الطول 165 – 170 سم" : "Size 54: Height 165 – 170 cm"}</span>
-                  <span>• {isRtl ? "مقاس 56: الطول 170 – 175 سم" : "Size 56: Height 170 – 175 cm"}</span>
-                  <span>• {isRtl ? "مقاس 58: الطول 175 – 180 سم" : "Size 58: Height 175 – 180 cm"}</span>
-                  <span>• {isRtl ? "مقاس 60: الطول 180 – 185 سم" : "Size 60: Height 180 – 185 cm"}</span>
-                  <span>• {isRtl ? "مقاس 62: الطول 185+ سم" : "Size 62: Height 185+ cm"}</span>
-                </div>
-              </motion.div>
+                    ? `متبقي ${currentVariant.quantityAvailable} فقط في المخزون — اطلب الآن!`
+                    : `Only ${currentVariant.quantityAvailable} ${currentVariant.quantityAvailable === 1 ? "piece" : "pieces"} left in stock — order soon!`}
+                </span>
+              </div>
             )}
 
-            {/* Quantity Selector & Add to Bag Buttons */}
             <div className="space-y-3 pt-2 mb-8">
               <div className="flex items-center gap-3">
                 {/* Quantity Controls */}

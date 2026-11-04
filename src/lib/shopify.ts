@@ -16,6 +16,7 @@ export interface ProductVariant {
     currencyCode: string;
   };
   availableForSale: boolean;
+  quantityAvailable?: number | null;
   selectedOptions?: SelectedOption[];
 }
 
@@ -599,6 +600,7 @@ export async function getProductByHandle(handle: string): Promise<Product | null
               id
               title
               availableForSale
+              quantityAvailable
               selectedOptions {
                 name
                 value
@@ -651,6 +653,7 @@ export async function getProductByHandle(handle: string): Promise<Product | null
               name: string;
               value: string;
             }>;
+            quantityAvailable?: number | null;
             price: {
               amount: string;
               currencyCode: string;
@@ -693,6 +696,7 @@ export async function getProductByHandle(handle: string): Promise<Product | null
         id: v.node.id,
         title: v.node.title,
         availableForSale: v.node.availableForSale,
+        quantityAvailable: v.node.quantityAvailable,
         selectedOptions: v.node.selectedOptions,
         price: {
           amount: Math.round(parseFloat(v.node.price.amount)).toString(),
