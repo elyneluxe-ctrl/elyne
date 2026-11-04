@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { Product, ProductVariant } from "@/lib/shopify";
+import { Product, ProductVariant, createShopifyCart } from "@/lib/shopify";
 import { Translations, getTranslations } from "@/lib/translations";
 
 export interface LocalCartItem {
@@ -167,13 +167,30 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setLanguageState(lang);
   };
 
-  const checkout = () => {
-    // If Shopify checkout URL is available, redirect; otherwise simulate luxury checkout flow
-    alert(
-      language === "AR"
-        ? "جاري الانتقال إلى بوابة الدفع الآمنة لمتجر إيلين لوكس بالدرهم الإماراتي..."
-        : "Proceeding to secure Shopify Checkout in AED..."
-    );
+  const checkout = async () => {
+    if (items.length === 0) return;
+
+    try {
+      // 1. Map items to Shopify line items format
+      const lines = items.map((item) => ({
+        merchandiseId: item.variant.id,
+        quantity: item.quantity
+      }));
+
+      // 2. Call Shopify Storefront API to generate real checkout URL
+      const cart = await createShopifyCart(lines);
+
+      if (cart?.checkoutUrl) {
+        window.location.href = cart.checkoutUrl;
+        return;
+      }
+    } catch (err) {
+      console.warn("Failed to generate direct Shopify checkout URL, falling back to store cart:", err);
+    }
+
+    // Fallback: If products are mock or API is unavailable, redirect directly to Shopify store cart
+    const storeDomain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "elyneluxe.myshopify.com";
+    window.location.href = `https://${storeDomain}/cart`;
   };
 
   const itemCount = items.reduce((acc, curr) => acc + curr.quantity, 0);

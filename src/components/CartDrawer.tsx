@@ -1,13 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { X, Plus, Minus, Trash2, ShoppingBag, ArrowRight, ArrowLeft } from "lucide-react";
+import { X, Plus, Minus, Trash2, ShoppingBag, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function CartDrawer() {
   const { isCartOpen, closeCart, items, updateQuantity, removeItem, subtotal, checkout, t, isRtl } = useCart();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+
+  const handleCheckoutClick = async () => {
+    setIsCheckingOut(true);
+    try {
+      await checkout();
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -155,11 +165,21 @@ export default function CartDrawer() {
                 </div>
 
                 <button
-                  onClick={checkout}
-                  className="w-full py-4 bg-[#1F2A24] text-[#F9F5EF] text-xs tracking-[0.2em] font-semibold uppercase hover:bg-[#B99A65] hover:text-[#1F2A24] transition-all duration-300 flex items-center justify-center space-x-2 rtl:space-x-reverse shadow-lg"
+                  onClick={handleCheckoutClick}
+                  disabled={isCheckingOut}
+                  className="w-full py-4 bg-[#1F2A24] text-[#F9F5EF] text-xs tracking-[0.2em] font-semibold uppercase hover:bg-[#B99A65] hover:text-[#1F2A24] disabled:opacity-75 transition-all duration-300 flex items-center justify-center space-x-2 rtl:space-x-reverse shadow-lg cursor-pointer"
                 >
-                  <span>{t.cart.checkout}</span>
-                  {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
+                  {isCheckingOut ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>{isRtl ? "جاري التجهيز..." : "REDIRECTING..."}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>{t.cart.checkout}</span>
+                      {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
+                    </>
+                  )}
                 </button>
 
                 <p className="text-[10px] text-center text-[#5A605C] tracking-wider uppercase font-light">

@@ -689,7 +689,9 @@ export async function getBestSellerProducts(): Promise<Product[]> {
 /**
  * Cart operations against Shopify Storefront API
  */
-export async function createShopifyCart(merchandiseId?: string, quantity: number = 1): Promise<Cart | null> {
+export async function createShopifyCart(
+  lines: Array<{ merchandiseId: string; quantity: number }> = []
+): Promise<Cart | null> {
   const query = `
     mutation cartCreate($input: CartInput) {
       cartCreate(input: $input) {
@@ -734,12 +736,19 @@ export async function createShopifyCart(merchandiseId?: string, quantity: number
             }
           }
         }
+        userErrors {
+          field
+          message
+        }
       }
     }
   `;
 
-  const variables = merchandiseId
-    ? { input: { lines: [{ merchandiseId, quantity }] } }
+  // Filter out non-Shopify IDs (e.g. mock IDs like "var-cw-52")
+  const validLines = lines.filter(l => l.merchandiseId && l.merchandiseId.startsWith("gid://shopify/ProductVariant/"));
+
+  const variables = validLines.length > 0
+    ? { input: { lines: validLines } }
     : { input: {} };
 
   interface CreateCartResponse {
@@ -758,6 +767,7 @@ export async function createShopifyCart(merchandiseId?: string, quantity: number
           }>;
         };
       };
+      userErrors: Array<{ field: string; message: string }>;
     };
   }
 
