@@ -5,7 +5,6 @@ import { CartProvider } from "@/context/CartContext";
 import CartDrawer from "@/components/CartDrawer";
 import SearchDrawer from "@/components/SearchDrawer";
 import ProductQuickView from "@/components/ProductQuickView";
-import FloatingContactButtons from "@/components/FloatingContactButtons";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -74,7 +73,6 @@ export default function RootLayout({
           <CartDrawer />
           <SearchDrawer />
           <ProductQuickView />
-          <FloatingContactButtons />
         </CartProvider>
       </body>
     </html>
