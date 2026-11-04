@@ -26,14 +26,21 @@ export function generateStaticParams() {
   return KNOWN_COLLECTIONS.map((handle) => ({ handle }));
 }
 
-export default async function CollectionPage({
+async function CollectionContent({
   params
 }: {
   params: Promise<{ handle: string }>;
 }) {
   const { handle } = await params;
   const initialProducts = await getCollectionProducts(handle);
+  return <CollectionClient handle={handle} initialProducts={initialProducts} />;
+}
 
+export default function CollectionPage({
+  params
+}: {
+  params: Promise<{ handle: string }>;
+}) {
   return (
     <Suspense
       fallback={
@@ -49,7 +56,7 @@ export default async function CollectionPage({
         </main>
       }
     >
-      <CollectionClient handle={handle} initialProducts={initialProducts} />
+      <CollectionContent params={params} />
     </Suspense>
   );
 }

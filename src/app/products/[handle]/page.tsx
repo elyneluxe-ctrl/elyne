@@ -11,13 +11,20 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function ProductDetailPage({
+async function ProductDetailContent({
   params
 }: {
   params: Promise<{ handle: string }>;
 }) {
   const { handle } = await params;
+  return <ProductDetailClient handle={handle} />;
+}
 
+export default function ProductDetailPage({
+  params
+}: {
+  params: Promise<{ handle: string }>;
+}) {
   return (
     <Suspense
       fallback={
@@ -33,7 +40,7 @@ export default async function ProductDetailPage({
         </main>
       }
     >
-      <ProductDetailClient handle={handle} />
+      <ProductDetailContent params={params} />
     </Suspense>
   );
 }
