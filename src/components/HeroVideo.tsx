@@ -8,45 +8,44 @@ import { useCart } from "@/context/CartContext";
 import { ArabianGeometricWatermark } from "./ArabianGeometricMotif";
 
 export default function HeroVideo() {
-  const desktopVideoRef = useRef<HTMLVideoElement>(null);
-  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { t, isRtl } = useCart();
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
 
   useEffect(() => {
-    desktopVideoRef.current?.play().catch(() => {});
-    mobileVideoRef.current?.play().catch(() => {});
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  useEffect(() => {
+    if (isMobile !== null && videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play().catch(() => {});
+    }
+  }, [isMobile]);
 
   return (
     <section className="relative w-full h-[92vh] sm:h-[95vh] lg:h-screen min-h-[640px] max-h-[1080px] bg-[#161F1A] overflow-hidden flex items-center">
-      {/* Background Media: Responsive Video Player (Mobile View vs Desktop View) */}
+      {/* Background Media: Active Video Player based on viewport */}
       <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
-        {/* Mobile View Only (< md / 768px): Dedicated mobile video */}
-        <video
-          ref={mobileVideoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          className="md:hidden w-full h-full object-cover object-center filter contrast-[1.06] saturate-[1.08] brightness-[1.02] transform-gpu will-change-transform scale-[1.005]"
-        >
-          <source src="/videos/elyne-hero-mobile.mp4" type="video/mp4" />
-        </video>
-
-        {/* Desktop View Only (>= md / 768px): Desktop widescreen video */}
-        <video
-          ref={desktopVideoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          className="hidden md:block w-full h-full object-cover object-center filter contrast-[1.06] saturate-[1.08] brightness-[1.02] transform-gpu will-change-transform scale-[1.005]"
-        >
-          <source src="/videos/elyne-hero-desktop.mp4" type="video/mp4" />
-        </video>
+        {isMobile !== null && (
+          <video
+            key={isMobile ? "mobile-hero" : "desktop-hero"}
+            ref={videoRef}
+            src={isMobile ? "/videos/elyne-hero-mobile.mp4" : "/videos/elyne-hero-desktop.mp4"}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover object-center filter contrast-[1.04] saturate-[1.05] brightness-[1.02]"
+          />
+        )}
       </div>
 
       {/* Hero Content positioned ~7% from left/right */}
