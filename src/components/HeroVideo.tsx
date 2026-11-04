@@ -8,29 +8,42 @@ import { useCart } from "@/context/CartContext";
 import { ArabianGeometricWatermark } from "./ArabianGeometricMotif";
 
 export default function HeroVideo() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
   const { t, isRtl } = useCart();
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.play().catch(() => {});
-    }
+    desktopVideoRef.current?.play().catch(() => {});
+    mobileVideoRef.current?.play().catch(() => {});
   }, []);
 
   return (
     <section className="relative w-full h-[92vh] sm:h-[95vh] lg:h-screen min-h-[640px] max-h-[1080px] bg-[#161F1A] overflow-hidden flex items-center">
-      {/* Background Media: Direct Video Only with Crisp Cinema Tone & Rendering */}
+      {/* Background Media: Responsive Video Player (Mobile View vs Desktop View) */}
       <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
+        {/* Mobile View Only (< md / 768px): Dedicated mobile video */}
         <video
-          ref={videoRef}
+          ref={mobileVideoRef}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
-          className="w-full h-full object-cover object-center filter contrast-[1.06] saturate-[1.08] brightness-[1.02] transform-gpu will-change-transform scale-[1.005]"
+          className="md:hidden w-full h-full object-cover object-center filter contrast-[1.06] saturate-[1.08] brightness-[1.02] transform-gpu will-change-transform scale-[1.005]"
+        >
+          <source src="/videos/elyne-hero-mobile.mp4" type="video/mp4" />
+        </video>
+
+        {/* Desktop View Only (>= md / 768px): Desktop widescreen video */}
+        <video
+          ref={desktopVideoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="hidden md:block w-full h-full object-cover object-center filter contrast-[1.06] saturate-[1.08] brightness-[1.02] transform-gpu will-change-transform scale-[1.005]"
         >
           <source src="/videos/elyne-hero-desktop.mp4" type="video/mp4" />
         </video>
