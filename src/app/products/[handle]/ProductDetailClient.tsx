@@ -25,16 +25,35 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-export default function ProductDetailClient({ handle }: { handle: string }) {
+export default function ProductDetailClient({
+  handle,
+  initialProduct = null
+}: {
+  handle: string;
+  initialProduct?: Product | null;
+}) {
   const router = useRouter();
   const { addToCart, openCart, wishlist, toggleWishlist, t, isRtl } = useCart();
-  const [product, setProduct] = useState<Product | null>(null);
+  const [product, setProduct] = useState<Product | null>(initialProduct);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!initialProduct);
 
   // Active selection states
-  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
-  const [selectedSize, setSelectedSize] = useState<string>("");
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>(() => {
+    const opts: Record<string, string> = {};
+    if (initialProduct?.options) {
+      initialProduct.options.forEach((opt) => {
+        if (opt.values && opt.values.length > 0) opts[opt.name] = opt.values[0];
+      });
+    }
+    if (initialProduct?.availableSizes && initialProduct.availableSizes.length > 0) {
+      opts["Size"] = initialProduct.availableSizes[0];
+    }
+    return opts;
+  });
+  const [selectedSize, setSelectedSize] = useState<string>(
+    initialProduct?.availableSizes?.[0] || ""
+  );
   const [quantity, setQuantity] = useState<number>(1);
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
   const [addedAnimation, setAddedAnimation] = useState(false);
@@ -44,7 +63,9 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
   useEffect(() => {
     async function loadProduct() {
       if (!handle) return;
-      setLoading(true);
+      if (!product) {
+        setLoading(true);
+      }
       try {
         const prod = await getProductByHandle(handle);
         if (prod) {

@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import ProductDetailClient from "./ProductDetailClient";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { MOCK_PRODUCTS, MOCK_KIDS_PRODUCTS } from "@/lib/shopify";
+import { getProductByHandle, MOCK_PRODUCTS, MOCK_KIDS_PRODUCTS } from "@/lib/shopify";
 
 export function generateStaticParams() {
   const all = [...MOCK_PRODUCTS, ...MOCK_KIDS_PRODUCTS];
@@ -17,7 +17,8 @@ async function ProductDetailContent({
   params: Promise<{ handle: string }>;
 }) {
   const { handle } = await params;
-  return <ProductDetailClient handle={handle} />;
+  const initialProduct = await getProductByHandle(handle);
+  return <ProductDetailClient handle={handle} initialProduct={initialProduct} />;
 }
 
 export default function ProductDetailPage({
