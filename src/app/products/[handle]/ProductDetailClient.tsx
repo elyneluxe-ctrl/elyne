@@ -152,8 +152,10 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
   }, [product, selectedOptions, selectedSize]);
 
   const displayPrice = currentVariant ? currentVariant.price : product.price;
+  const isAvailableForSale = currentVariant ? currentVariant.availableForSale : product.availableForSale;
 
   const handleAddToCart = () => {
+    if (!isAvailableForSale) return;
     const selectedVariant = currentVariant || product.variants[0] || {
       id: `var-${product.id}-${selectedSize || "default"}`,
       title: selectedSize ? `Size ${selectedSize}` : "Default",
@@ -168,7 +170,7 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
   };
 
   const handleBuyNow = async () => {
-    if (!product) return;
+    if (!product || !isAvailableForSale) return;
     setIsBuyingNow(true);
 
     try {
@@ -444,8 +446,18 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
             ) : null}
 
             {/* Quantity Selector & Add to Bag Buttons */}
-            {/* Live Inventory Stock Urgency Notice */}
-            {currentVariant && typeof currentVariant.quantityAvailable === "number" && currentVariant.quantityAvailable > 0 && currentVariant.quantityAvailable < 5 && (
+            {/* Live Inventory Stock Urgency or Out of Stock Notice */}
+            {!isAvailableForSale ? (
+              <div className="flex items-center space-x-2 rtl:space-x-reverse text-xs text-[#8A3A3A] bg-[#8A3A3A]/10 border border-[#8A3A3A]/30 px-3.5 py-2.5 rounded-xs mb-4">
+                <span className="w-2 h-2 rounded-full bg-[#8A3A3A] shrink-0" />
+                <span className="font-semibold uppercase tracking-wider">
+                  {isRtl ? "نفدت الكمية حالياً" : "OUT OF STOCK"}
+                </span>
+                <span className="text-[#5A605C] font-light">
+                  {isRtl ? "— هذه القطعة غير متوفرة حالياً" : "— this selection is currently unavailable"}
+                </span>
+              </div>
+            ) : currentVariant && typeof currentVariant.quantityAvailable === "number" && currentVariant.quantityAvailable > 0 && currentVariant.quantityAvailable < 5 ? (
               <div className="flex items-center space-x-2 rtl:space-x-reverse text-xs text-[#B99A65] bg-[#B99A65]/10 border border-[#B99A65]/30 px-3.5 py-2.5 rounded-xs mb-4">
                 <span className="w-2 h-2 rounded-full bg-[#B99A65] animate-pulse shrink-0" />
                 <span className="font-medium">
@@ -454,14 +466,15 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
                     : `Only ${currentVariant.quantityAvailable} ${currentVariant.quantityAvailable === 1 ? "piece" : "pieces"} left in stock — order soon!`}
                 </span>
               </div>
-            )}
+            ) : null}
 
             <div className="space-y-3 pt-2 mb-8">
               <div className="flex items-center gap-3">
                 {/* Quantity Controls */}
-                <div className="flex items-center border border-[#DCD5C7] bg-white h-12 px-3">
+                <div className={`flex items-center border border-[#DCD5C7] bg-white h-12 px-3 ${!isAvailableForSale ? "opacity-40 pointer-events-none" : ""}`}>
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    disabled={!isAvailableForSale}
                     className="p-1 text-[#1F2A24] hover:text-[#B99A65] transition-colors"
                     aria-label="Decrease quantity"
                   >
@@ -472,6 +485,7 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
                   </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
+                    disabled={!isAvailableForSale}
                     className="p-1 text-[#1F2A24] hover:text-[#B99A65] transition-colors"
                     aria-label="Increase quantity"
                   >
@@ -482,9 +496,12 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
                 {/* Primary Add To Bag Button */}
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 h-12 bg-[#1F2A24] text-[#F9F5EF] text-xs font-semibold tracking-[0.22em] uppercase hover:bg-[#B99A65] hover:text-[#1F2A24] transition-all duration-300 flex items-center justify-center space-x-2 rtl:space-x-reverse shadow-md active:scale-[0.99]"
+                  disabled={!isAvailableForSale}
+                  className="flex-1 h-12 bg-[#1F2A24] text-[#F9F5EF] text-xs font-semibold tracking-[0.22em] uppercase hover:bg-[#B99A65] hover:text-[#1F2A24] disabled:bg-[#A39E93] disabled:text-[#F9F5EF] disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center space-x-2 rtl:space-x-reverse shadow-md active:scale-[0.99]"
                 >
-                  {addedAnimation ? (
+                  {!isAvailableForSale ? (
+                    <span>{isRtl ? "نفدت الكمية" : "OUT OF STOCK"}</span>
+                  ) : addedAnimation ? (
                     <>
                       <Check className="w-4 h-4 text-white" />
                       <span>{isRtl ? "تمت الإضافة للحقيبة" : "ADDED TO BAG"}</span>
@@ -501,10 +518,12 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
               {/* Express Direct Checkout / Buy Now Button */}
               <button
                 onClick={handleBuyNow}
-                disabled={isBuyingNow}
-                className="w-full h-12 border-2 border-[#1F2A24] bg-[#F9F5EF] text-[#1F2A24] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#1F2A24] hover:text-[#F9F5EF] disabled:opacity-75 transition-all duration-300 flex items-center justify-center space-x-2 rtl:space-x-reverse cursor-pointer shadow-sm active:scale-[0.99]"
+                disabled={!isAvailableForSale || isBuyingNow}
+                className="w-full h-12 border-2 border-[#1F2A24] bg-[#F9F5EF] text-[#1F2A24] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#1F2A24] hover:text-[#F9F5EF] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center space-x-2 rtl:space-x-reverse cursor-pointer shadow-sm active:scale-[0.99]"
               >
-                {isBuyingNow ? (
+                {!isAvailableForSale ? (
+                  <span>{isRtl ? "المنتج غير متوفر حالياً" : "UNAVAILABLE"}</span>
+                ) : isBuyingNow ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
                     <span>{isRtl ? "جاري التجهيز والدفع..." : "PROCEEDING TO CHECKOUT..."}</span>
