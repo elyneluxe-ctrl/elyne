@@ -11,22 +11,22 @@ export default function Craftsmanship() {
   const details = [
     {
       title: isRtl ? "حرفية الياقة" : "COLLAR CRAFTSMANSHIP",
-      image: "/images/story-philosophy-collar-hq.jpg",
+      image: "/images/craft-collar-hq.jpg",
       alt: "Close-up of bespoke Kandura collar construction and buttoning"
     },
     {
       title: isRtl ? "أقمشة يابانية فاخرة" : "PREMIUM TOYOBO FABRIC",
-      image: "/images/craft-fabric.webp",
+      image: "/images/craft-fabric-hq.jpg",
       alt: "Close-up of ultra-fine Japanese breathable crepe fabric drape"
     },
     {
       title: isRtl ? "تشطيب الأكمام" : "CUFF FINISHING",
-      image: "/images/craft-cuff.webp",
+      image: "/images/craft-cuff-hq.jpg",
       alt: "Close-up of sleeve cuff tailoring and mother-of-pearl button"
     },
     {
       title: isRtl ? "دقة الخياطة" : "PRECISION STITCHING",
-      image: "/images/craft-stitching.webp",
+      image: "/images/craft-stitching-hq.jpg",
       alt: "Close-up of pristine single-needle Emirati seam stitching"
     }
   ];
