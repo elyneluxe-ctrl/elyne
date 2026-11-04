@@ -308,28 +308,6 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
                 </>
               )}
 
-              {/* Wishlist Button */}
-              <button
-                onClick={() => toggleWishlist(product.id)}
-                className={`absolute top-4 ${
-                  isRtl ? "left-4" : "right-4"
-                } z-20 p-2.5 rounded-full bg-white/70 backdrop-blur-xs text-[#1F2A24] hover:scale-110 transition-transform shadow-xs`}
-                aria-label="Toggle wishlist"
-              >
-                <Heart
-                  className={`w-4 h-4 stroke-[1.8] ${
-                    isWishlisted ? "fill-[#1F2A24] text-[#1F2A24]" : "text-[#1F2A24]"
-                  }`}
-                />
-              </button>
-
-              {/* Badge */}
-              <div className={`absolute top-4 ${isRtl ? "right-4" : "left-4"} z-20`}>
-                <span className="bg-[#1F2A24] text-[#F9F5EF] text-[9px] sm:text-[10px] font-semibold px-2.5 py-1 tracking-[0.2em] uppercase">
-                  {isRtl ? "تفصيل الأتيليه" : "BESPOKE CRAFT"}
-                </span>
-              </div>
-
               {/* Image Counter Badge */}
               {images.length > 1 && (
                 <div
