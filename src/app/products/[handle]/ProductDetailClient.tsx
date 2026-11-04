@@ -78,6 +78,35 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
     loadProduct();
   }, [handle]);
 
+  // Find currently matched variant based on selected options or size
+  const currentVariant = useMemo(() => {
+    if (!product || !product.variants || product.variants.length === 0) return null;
+
+    // Check if variant has selectedOptions
+    const optionKeys = Object.keys(selectedOptions);
+    if (optionKeys.length > 0) {
+      const match = product.variants.find((v) => {
+        if (v.selectedOptions && v.selectedOptions.length > 0) {
+          return v.selectedOptions.every(
+            (opt) => selectedOptions[opt.name] === opt.value
+          );
+        }
+        return false;
+      });
+      if (match) return match;
+    }
+
+    // Fallback: match by title / size
+    if (selectedSize) {
+      const sizeMatch = product.variants.find(
+        (v) => v.title === selectedSize || v.title.includes(selectedSize)
+      );
+      if (sizeMatch) return sizeMatch;
+    }
+
+    return product.variants[0];
+  }, [product, selectedOptions, selectedSize]);
+
   if (loading) {
     return (
       <main className="min-h-screen bg-[#F9F5EF] flex flex-col justify-between">
@@ -121,35 +150,6 @@ export default function ProductDetailClient({ handle }: { handle: string }) {
   const isWishlisted = wishlist.includes(product.id);
   const images = product.images && product.images.length > 0 ? product.images : [product.featuredImage];
   const activeImage = images[activeImageIndex] || product.featuredImage;
-
-  // Find currently matched variant based on selected options or size
-  const currentVariant = useMemo(() => {
-    if (!product || !product.variants || product.variants.length === 0) return null;
-
-    // Check if variant has selectedOptions
-    const optionKeys = Object.keys(selectedOptions);
-    if (optionKeys.length > 0) {
-      const match = product.variants.find((v) => {
-        if (v.selectedOptions && v.selectedOptions.length > 0) {
-          return v.selectedOptions.every(
-            (opt) => selectedOptions[opt.name] === opt.value
-          );
-        }
-        return false;
-      });
-      if (match) return match;
-    }
-
-    // Fallback: match by title / size
-    if (selectedSize) {
-      const sizeMatch = product.variants.find(
-        (v) => v.title === selectedSize || v.title.includes(selectedSize)
-      );
-      if (sizeMatch) return sizeMatch;
-    }
-
-    return product.variants[0];
-  }, [product, selectedOptions, selectedSize]);
 
   const displayPrice = currentVariant ? currentVariant.price : product.price;
   const isAvailableForSale = currentVariant ? currentVariant.availableForSale : product.availableForSale;
