@@ -160,24 +160,6 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* PREMIUM */}
-          <div className="relative py-2">
-            <Link
-              href="/collections/premium"
-              onClick={() => setActiveMegaMenu(null)}
-              className={`py-1 transition-colors uppercase relative ${
-                pathname === "/collections/premium" || pathname === "/collections/premium-thobes"
-                  ? "text-[#B99A65]"
-                  : "hover:text-[#B99A65]"
-              }`}
-            >
-              <span>{t.nav.premium}</span>
-            </Link>
-            {(pathname === "/collections/premium" || pathname === "/collections/premium-thobes") && (
-              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#B99A65]" />
-            )}
-          </div>
-
           {/* COLLECTIONS */}
           <div
             className="relative py-2"
@@ -395,16 +377,6 @@ export default function Navbar() {
                       </div>
                     )}
                   </div>
-
-                  {/* PREMIUM DIRECT LINK */}
-                  <Link
-                    href="/collections/premium"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block text-sm tracking-[0.2em] font-medium text-[#F9F5EF] hover:text-[#B99A65] py-3 border-b border-[#2C3B33]/50 flex items-center justify-between"
-                  >
-                    <span>{t.nav.premium}</span>
-                    <span className="text-[10px] tracking-widest text-[#B99A65] uppercase font-semibold border border-[#B99A65]/40 px-2 py-0.5">COUTURE</span>
-                  </Link>
 
                   {/* COLLECTIONS Accordion */}
                   <div className="border-b border-[#2C3B33]/50 pb-2">
