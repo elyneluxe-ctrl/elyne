@@ -41,7 +41,7 @@ export default function HeroVideo() {
     <section className="relative w-full h-[92vh] sm:h-[95vh] lg:h-screen min-h-[640px] max-h-[1080px] bg-[#161F1A] overflow-hidden flex items-center">
       {/* Background Media: Native Responsive Videos for Desktop & Mobile */}
       <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
-        {/* Mobile View Video (< 768px): Dedicated vertical mobile campaign */}
+        {/* Mobile View Video (< 768px): Enhanced TensorPix mobile video */}
         <video
           ref={mobileVideoRef}
           src="/videos/elyne-hero-mobile.mp4"
@@ -52,7 +52,7 @@ export default function HeroVideo() {
           controls={false}
           disablePictureInPicture
           preload="auto"
-          className="block md:hidden w-full h-full object-cover object-center filter contrast-[1.04] saturate-[1.05] brightness-[1.02]"
+          className="block md:hidden w-full h-full object-cover object-center transform-gpu will-change-transform filter contrast-[1.03] saturate-[1.03]"
         />
 
         {/* Desktop View Video (>= 768px): Enhanced TensorPix widescreen video */}
