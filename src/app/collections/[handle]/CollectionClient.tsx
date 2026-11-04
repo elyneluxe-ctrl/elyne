@@ -21,6 +21,41 @@ interface CollectionMeta {
 }
 
 const COLLECTION_DATA: Record<string, CollectionMeta> = {
+  "moroccan-hooded-thobes": {
+    titleEn: "MOROCCAN HOODED THOBES",
+    titleAr: "الكنادير المغربية بالقلنسوة",
+    descEn: "Traditional master-tailored Moroccan hooded silhouettes featuring authentic sfifa embroidery.",
+    descAr: "كنادير مغربية أصيلة بالقلنسوة وتطريز السفيفة اليدوي الفاخر لمظهر يجمع الأصالة والوقار.",
+    heroImage: "/images/collection-men-luxury.jpg"
+  },
+  "moroccan-thobes-without-hood": {
+    titleEn: "MOROCCAN THOBES WITHOUT HOOD",
+    titleAr: "الكنادير المغربية بدون قلنسوة",
+    descEn: "Clean-cut Moroccan thobes with intricate collar sfifa braiding and comfortable relaxed fit.",
+    descAr: "كنادير مغربية راقية بياقة كلاسيكية وتطريز مغربي ناعم خفيف بدون قلنسوة.",
+    heroImage: "/images/product-classic-white.webp"
+  },
+  "moroccan-half-sleeve-thobes": {
+    titleEn: "MOROCCAN HALF SLEEVE THOBES",
+    titleAr: "الكنادير المغربية بنصف كم",
+    descEn: "Breathable short-sleeve artisanal silhouettes tailored for comfort and casual luxury.",
+    descAr: "تصاميم مغربية أنيقة بنصف كم تجمع بين التهوية المثالية والخياطة الرفيعة للمناسبات اليومية.",
+    heroImage: "/images/campaign-banner-hq.jpg"
+  },
+  "half-sleeve-thobes": {
+    titleEn: "HALF SLEEVE THOBES",
+    titleAr: "الكنادير بنصف كم",
+    descEn: "Contemporary half-sleeve silhouettes tailored from crisp lightweight summer textiles.",
+    descAr: "كنادير عصرية بنصف كم بأقمشة يابانية صيفية باردة مريحة ومميزة.",
+    heroImage: "/images/product-sand-beige.webp"
+  },
+  "kids-thobes": {
+    titleEn: "KIDS THOBES",
+    titleAr: "كنادير الأولاد والأطفال",
+    descEn: "Pure elegance crafted for young gentlemen with hypoallergenic breathable fabrics and comfortable movement.",
+    descAr: "كنادير فاخرة ومريحة للأولاد والفرسان الصغار بأقمشة ناعمة تلائم بهجة المناسبات.",
+    heroImage: "/images/boys-luxury-thobe.png"
+  },
   "emirati-thobes": {
     titleEn: "EMIRATI KANDURAS",
     titleAr: "الكنادير الإماراتية الأصيلة",
@@ -93,7 +128,13 @@ const COLLECTION_DATA: Record<string, CollectionMeta> = {
   }
 };
 
-export default function CollectionClient({ handle }: { handle: string }) {
+export default function CollectionClient({
+  handle,
+  initialProducts = []
+}: {
+  handle: string;
+  initialProducts?: Product[];
+}) {
   const router = useRouter();
   const { addToCart, openCart, setQuickViewProduct, wishlist, toggleWishlist, t, isRtl } = useCart();
   const [sortBy, setSortBy] = useState<"featured" | "price-asc" | "price-desc">("featured");
@@ -108,6 +149,11 @@ export default function CollectionClient({ handle }: { handle: string }) {
   };
 
   const allProducts: Product[] = useMemo(() => {
+    // If Shopify returned real live products for this collection, use them directly!
+    if (initialProducts && initialProducts.length > 0) {
+      return initialProducts;
+    }
+
     if (handle === "boys" || handle === "kids-thobes") {
       const boysList = MOCK_PRODUCTS.filter((p) => p.category === "boys" || p.category === "kids");
       return boysList.length > 0 ? boysList : MOCK_PRODUCTS;
@@ -120,7 +166,7 @@ export default function CollectionClient({ handle }: { handle: string }) {
       return MOCK_PRODUCTS.filter((p) => p.category === "bestsellers" || p.category === "men");
     }
     return MOCK_PRODUCTS;
-  }, [handle]);
+  }, [handle, initialProducts]);
 
   const sortedProducts = useMemo(() => {
     const list = [...allProducts];

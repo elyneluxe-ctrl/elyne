@@ -2,18 +2,24 @@ import React, { Suspense } from "react";
 import CollectionClient from "./CollectionClient";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getCollectionProducts } from "@/lib/shopify";
 
 const KNOWN_COLLECTIONS = [
   "emirati-thobes",
   "moroccan-thobes",
-  "men",
-  "boys",
+  "moroccan-hooded-thobes",
+  "moroccan-thobes-without-hood",
+  "moroccan-half-sleeve-thobes",
+  "half-sleeve-thobes",
+  "kids-thobes",
   "premium-thobes",
   "modern-thobes",
   "thasbih-ring",
+  "men",
+  "boys",
+  "premium",
   "best-sellers",
-  "new-arrivals",
-  "kids-thobes"
+  "new-arrivals"
 ];
 
 export function generateStaticParams() {
@@ -26,6 +32,7 @@ export default async function CollectionPage({
   params: Promise<{ handle: string }>;
 }) {
   const { handle } = await params;
+  const initialProducts = await getCollectionProducts(handle);
 
   return (
     <Suspense
@@ -42,7 +49,7 @@ export default async function CollectionPage({
         </main>
       }
     >
-      <CollectionClient handle={handle} />
+      <CollectionClient handle={handle} initialProducts={initialProducts} />
     </Suspense>
   );
 }
