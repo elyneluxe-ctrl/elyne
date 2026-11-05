@@ -57,7 +57,7 @@ export default function HeroVideo() {
   return (
     <section className="relative w-full h-[92vh] sm:h-[95vh] lg:h-screen min-h-[640px] max-h-[1080px] bg-[#161F1A] overflow-hidden flex items-center">
       {/* Background Media: Native Responsive Videos for Desktop & Mobile */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden bg-[#161F1A]">
+      <div className="absolute inset-0 w-full h-full overflow-hidden bg-transparent">
         {/* Mobile View Video (< 768px): Enhanced TensorPix mobile video */}
         <video
           ref={mobileVideoRef}
@@ -69,8 +69,8 @@ export default function HeroVideo() {
           playsInline
           controls={false}
           disablePictureInPicture
-          preload="metadata"
-          className="block md:hidden w-full h-full object-cover object-center transform-gpu will-change-transform filter contrast-[1.03] saturate-[1.03]"
+          preload="auto"
+          className="block md:hidden w-full h-full object-cover object-center transform-gpu will-change-transform"
         />
 
         {/* Desktop View Video (>= 768px): Enhanced TensorPix widescreen video */}
@@ -85,12 +85,8 @@ export default function HeroVideo() {
           controls={false}
           disablePictureInPicture
           preload="auto"
-          className="hidden md:block w-full h-full object-cover object-center transform-gpu will-change-transform filter contrast-[1.03] saturate-[1.03]"
+          className="hidden md:block w-full h-full object-cover object-center transform-gpu will-change-transform"
         />
-
-        {/* Ambient Gradient Overlays for Luxury Contrast & Mobile Readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/25 md:from-black/70 md:via-black/20 md:to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent md:from-black/60 md:via-transparent pointer-events-none" />
       </div>
 
       {/* Hero Content positioned ~7% from left/right */}

@@ -67,6 +67,9 @@ export default function RootLayout({
       className={`${montserrat.variable} ${ibmPlexSansArabic.variable} h-full scroll-smooth`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="preload" href="/images/elyne-hero-desktop-hq.jpg" as="image" fetchPriority="high" />
+      </head>
       <body className="min-h-full flex flex-col bg-[#F9F5EF] text-[#1F2A24] antialiased selection:bg-[#1F2A24] selection:text-[#F9F5EF]">
         <CartProvider>
           {children}
