@@ -68,7 +68,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel="preload" href="/images/elyne-hero-desktop-hq.jpg" as="image" fetchPriority="high" />
+        <link rel="preload" href="/videos/elyne-hero-desktop.mp4" as="video" type="video/mp4" />
       </head>
       <body className="min-h-full flex flex-col bg-[#F9F5EF] text-[#1F2A24] antialiased selection:bg-[#1F2A24] selection:text-[#F9F5EF]">
         <CartProvider>

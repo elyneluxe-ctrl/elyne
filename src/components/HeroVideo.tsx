@@ -62,7 +62,6 @@ export default function HeroVideo() {
         <video
           ref={mobileVideoRef}
           src="/videos/elyne-hero-mobile.mp4"
-          poster="/images/elyne-hero-desktop-hq.jpg"
           autoPlay
           muted
           loop
@@ -77,7 +76,6 @@ export default function HeroVideo() {
         <video
           ref={desktopVideoRef}
           src="/videos/elyne-hero-desktop.mp4"
-          poster="/images/elyne-hero-desktop-hq.jpg"
           autoPlay
           muted
           loop
